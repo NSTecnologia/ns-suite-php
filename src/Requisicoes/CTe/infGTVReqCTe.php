@@ -1,15 +1,24 @@
 <?php
 
-class InfGTVReqCTe {
-    public $chCTe;
-    public $tpAmb;
-    public $dhEvento;
-    public $nSeqEvento;
-    public $infGTV;
-}
 class InfEspecie{
     public $tpEspecie;
     public $vEspecie;
+}
+
+class DestCTeOS{
+    public $CNPJ;
+    public $CPF;
+    public $IE;
+    public $UF;
+    public $xNome;
+}
+
+class Rem{
+    public $CNPJ;
+    public $CPF;
+    public $IE;
+    public $UF;
+    public $xNome;
 }
 
 class InfGTV{
@@ -27,18 +36,12 @@ class InfGTV{
     public $rem;
     public $dest;
 }
-class DestCTeOS{
-    public $CNPJ;
-    public $CPF;
-    public $IE;
-    public $UF;
-    public $xNome;
-}
-class Rem{
-    public $CNPJ;
-    public $CPF;
-    public $IE;
-    public $UF;
-    public $xNome;
+
+class InfGTVReqCTe {
+    public $chCTe;
+    public $tpAmb;
+    public $dhEvento;
+    public $nSeqEvento;
+    public $infGTV;
 }
 ?>
