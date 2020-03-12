@@ -27,7 +27,7 @@ class InfGTV{
     public $rem;
     public $dest;
 }
-class Dest{
+class DestCTeOS{
     public $CNPJ;
     public $CPF;
     public $IE;
