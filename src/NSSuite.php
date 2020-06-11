@@ -197,7 +197,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlConsulta, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[NAO_EMBARQUE_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
         return $resposta;
     }
 
@@ -338,7 +338,7 @@ class NSSuite{
         $resposta = enviaConteudoParaAPI($json, $urlInfGTV, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[INFORMACOES_GTV_DADOS]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -483,7 +483,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlEncerramento, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[ENCERRAMENTO_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -518,7 +518,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlIncCondutor, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[INC_CONDUTOR_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -552,7 +552,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlConsNaoEncerrados, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[CONS_NAO_ENCERRADOS_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -770,7 +770,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($conteudo, $urlEnvio, $tpConteudo);
 
         $this->genericos->gravarLinhaLog($modelo, '[ENVIA_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -806,7 +806,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlConsulta, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[CONSULTA_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -848,7 +848,7 @@ class NSSuite{
 
         if(($status != 200) || ($status != 100)){
             $this->genericos->gravarLinhaLog($modelo, '[DOWNLOAD_RESPOSTA]');
-            $this->genericos->gravarLinhaLog($modelo, $resposta);
+            $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
         }else{
             $this->genericos->gravarLinhaLog($modelo, '[DOWNLOAD_STATUS]');
             $this->genericos->gravarLinhaLog($modelo, $status);
@@ -937,7 +937,7 @@ class NSSuite{
 
         if(($status != 200) || ($status != 100)){
             $this->genericos->gravarLinhaLog($modelo, '[DOWNLOAD_EVENTO_RESPOSTA]');
-            $this->genericos->gravarLinhaLog($modelo, $resposta);
+            $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
         }else{
             $this->genericos->gravarLinhaLog($modelo, '[DOWNLOAD_EVENTO_STATUS]');
             $this->genericos->gravarLinhaLog($modelo, $status);
@@ -1049,7 +1049,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlCancelamento, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[CANCELAMENTO_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -1091,7 +1091,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlCCe, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[CCE_DADOS]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -1134,7 +1134,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlInutilizacao, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[INUTILIZAR_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -1213,7 +1213,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlConsCad, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[CONS_CAD_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -1253,7 +1253,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlConsSit, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[CONS_SIT_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -1286,7 +1286,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlListarNSNRecs, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[LISTAR_NSNRECS_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
@@ -1314,7 +1314,7 @@ class NSSuite{
         $resposta = $this->enviaConteudoParaAPI($json, $urlEnviarEmail, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[ENVIO_EMAIL_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, $resposta);
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
     }
