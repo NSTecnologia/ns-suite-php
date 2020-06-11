@@ -565,7 +565,6 @@
 		public $ICMSSN202; //ICMSSN202
 		public $ICMSSN500; //ICMSSN500
 		public $ICMSSN900; //ICMSSN900
-		public $ICMSUFDest; //ICMSUFDest
 	}
 
 	class IPITrib {
@@ -705,6 +704,7 @@
 	class Imposto {
 		public $vTotTrib; //String
 		public $ICMS; //ICMS
+		public $ICMSUFDest; //ICMSUFDest
 		public $IPI; //IPI
 		public $II; //II
 		public $PIS; //PIS
