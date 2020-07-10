@@ -588,7 +588,6 @@
 		public $cEnq; //String
 		public $IPITrib; //IPITrib
 		public $IPINT; //IPINT
-		public $vIPIDevol; //String
 	}
 
 	class II {
@@ -713,10 +712,12 @@
 		public $COFINSST; //COFINSST
 		public $ISSQN; //ISSQN
 	}
-
+	class IPIDevol {
+		public $vIPIDevol; //String or Double(13v2)
+	}
 	class ImpostoDevol {
 		public $pDevol; //String
-		public $IPI; //IPI
+		public $IPI; //IPIDevol		
 	}
 
 	class Det {
