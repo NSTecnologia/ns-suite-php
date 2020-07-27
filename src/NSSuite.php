@@ -37,7 +37,7 @@ class NSSuite{
         $this->parametros = new Parametros(1);
         $this->endpoints = new Endpoints;
         $this->genericos = new Genericos;
-        $this->token = 'COLOQUE_TOKEN';
+        $this->token = '4EB15D6DEDAEBAE3FD0B7B5E5B0AD6D4';
     }
 
     // Esta função envia um conteúdo para uma URL, em requisições do tipo POST
@@ -851,7 +851,7 @@ class NSSuite{
             $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
         }else{
             $this->genericos->gravarLinhaLog($modelo, '[DOWNLOAD_STATUS]');
-            $this->genericos->gravarLinhaLog($modelo, $status);
+            $this->genericos->gravarLinhaLog($modelo, json_encode($status));
         }
         return $resposta;
     }
@@ -940,7 +940,7 @@ class NSSuite{
             $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
         }else{
             $this->genericos->gravarLinhaLog($modelo, '[DOWNLOAD_EVENTO_STATUS]');
-            $this->genericos->gravarLinhaLog($modelo, $status);
+            $this->genericos->gravarLinhaLog($modelo, json_encode($status));
         }
 
         return $resposta;
