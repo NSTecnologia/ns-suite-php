@@ -581,7 +581,6 @@
 	}
 
 	class IPI {
-		public $clEnq; //String
 		public $CNPJProd; //String
 		public $cSelo; //String
 		public $qSelo; //String
