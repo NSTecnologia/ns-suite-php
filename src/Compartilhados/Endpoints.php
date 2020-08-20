@@ -63,5 +63,6 @@ class Endpoints {
     public $NFeInutilizacao  = 'https://nfe.ns.eti.br/nfe/inut';
     public $NFeListarNSNRecs  = 'https://nfe.ns.eti.br/util/list/nsnrecs';
     public $NFePrevia  = 'https://nfe.ns.eti.br/util/preview/nfe';
+    public $NFeNSTributos = 'https://tributos.ns.eti.br/v1/nfe';
 }
 ?>

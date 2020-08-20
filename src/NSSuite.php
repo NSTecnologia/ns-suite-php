@@ -1317,6 +1317,33 @@ class NSSuite{
         $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
+    
+    }
+    
+    public function xmlTributos($modelo, $conteudo, $tpConteudo){
+        switch ($modelo)
+        {
+            case '55':
+                $urlTributos = $this->endpoints->NFeNSTributos;
+                break;
+            default:
+                throw new Exception('Não definido endpoint do NS Tributos para o modelo ' . $modelo);
+
+        }
+        $this->genericos->gravarLinhaLog($modelo, '[GERAR_TRIBUTOS_DADOS]');
+        $this->genericos->gravarLinhaLog($modelo, $conteudo);
+
+        $resposta = $this->enviaConteudoParaAPI($json, $urlTributos, $tpConteudo);
+
+        $this->genericos->gravarLinhaLog($modelo, '[GERAR_TRIBUTOS_RESPOSTA]');
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
+
+        $statusEnvio = $resposta['status'];
+
+        if ($statusEnvio == 200){   
+            return $resposta['xml'];
+        }
+        return $resposta;
     }
 }
 ?>
