@@ -1333,7 +1333,7 @@ class NSSuite{
         $this->genericos->gravarLinhaLog($modelo, '[GERAR_TRIBUTOS_DADOS]');
         $this->genericos->gravarLinhaLog($modelo, $conteudo);
 
-        $resposta = $this->enviaConteudoParaAPI($json, $urlTributos, $tpConteudo);
+        $resposta = $this->enviaConteudoParaAPI($conteudo, $urlTributos, $tpConteudo);
 
         $this->genericos->gravarLinhaLog($modelo, '[GERAR_TRIBUTOS_RESPOSTA]');
         $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
