@@ -680,7 +680,7 @@ class NSSuite{
 
                     if ($statusDownload != 200) $motivo = $resposta['motivo'];
                 }else{
-                    $motivo = $resposta['motivo'];
+                    $motivo = $resposta['xMotivo'];
                 }
             }else if ($statusConsulta == -2) {
 
