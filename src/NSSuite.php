@@ -1098,7 +1098,7 @@ class NSSuite{
 
     public function corrigirDocumentoESalvar($modelo, $corrigirReq, $downloadEventoReq, $caminho, $chave, $nSeqEvento, $exibeNaTela) {
         $resposta = $this->corrigirDocumento($modelo, $corrigirReq);
-        $status = resposta['status'];
+        $status = $resposta['status'];
 
         if ($status == 200){
                 $respostaDownloadEvento = $this->downloadEventoESalvar($modelo, $downloadEventoReq, $caminho, $chave, $nSeqEvento, $exibeNaTela);
