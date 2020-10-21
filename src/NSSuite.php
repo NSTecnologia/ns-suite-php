@@ -961,7 +961,7 @@ class NSSuite{
             }catch (Exception $ex){
 
                 $this->genericos->gravarLinhaLog($modelo, '[CRIA_DIRETORIO] '+ $caminho);
-                $this->genericos->gravarLinhaLog($modelo, $e.getMessage());
+                $this->genericos->gravarLinhaLog($modelo, $ex.getMessage());
                 throw new Exception('Exceção capturada: ' . $ex.getMessage());
             }
 
@@ -985,7 +985,7 @@ class NSSuite{
                     
                     $this->genericos->salvaXML($xml, $caminho, $nome);
                 }
-                if ((strpos(strtoupper($downloadReq->tpDown), 'P') >= 0) ){
+                if ((strpos(strtoupper($downloadEventoReq->tpDown), 'P') >= 0) ){
 
                     $pdf = $resposta['pdf'];
 
