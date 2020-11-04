@@ -579,7 +579,7 @@ class NSSuite{
             if ($cStat == 100 || $cStat == 150){
                 
                 $chNFe = $resposta['nfeProc']['chNFe'];
-                $nProt = $resposta['nfeProc']['Prot'];
+                $nProt = $resposta['nfeProc']['nProt'];
                 $motivo = $resposta['nfeProc']['xMotivo'];
 
                 sleep($this->parametros->TEMPO_ESPERA);
