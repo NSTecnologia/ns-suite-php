@@ -33,8 +33,6 @@ Para realizar uma emissão completa de uma NFe (utilizada para exemplo), você p
 
 **ATENÇÃO:** o **token** também é um parâmetro necessário e você deve, primeiramente, defini-lo na classe **NSSuite.php**, como pode ver abaixo:
 
-![dependency](https://confluence.ns.eti.br/download/attachments/25690844/image2019-3-25%209%3A35%3A16.png?version=1&modificationDate=1553517682585&api=v2)
-
 Parametros     | Descrição
 :-------------:|:-----------
 conteudo       | Conteúdo de emissão do documento.
@@ -113,8 +111,6 @@ Utilizando NFe como exemplo para o cancelamento deve-se ter em mente que você d
 
 **ATENÇÃO:** o **token** também é um parâmetro necessário e você deve, primeiramente, defini-lo na classe **NSSuite.php**, como pode ver abaixo:
 
-![dependency](https://confluence.ns.eti.br/download/attachments/25690844/image2019-3-25%209%3A35%3A16.png?version=1&modificationDate=1553517682585&api=v2)
-
 Parametros     | Descrição
 :-------------:|:-----------
 **modelo**            | Conteúdo de emissão do documento.<ul> <li>"63" (BPe);</li> <li>"57" (CTe);</li> <li>"67" (CTeOS);</li> <li>"58" (MDFe);</li> <li>"65" (NFCe);</li> <li>"55" (NFe);</li> </ul>
@@ -171,9 +167,7 @@ Utilizando NFe como exemplo para a criação de uma carta de correção, deve-se
 
 ##### Parâmetros:
 
-**ATENÇÃO:** o **token** também é um parâmetro necessário e você deve, primeiramente, defini-lo na classe **NSSuite.java**, como pode ver abaixo:
-
-![dependency](https://confluence.ns.eti.br/download/attachments/25690844/image2019-3-25%209%3A35%3A16.png?version=1&modificationDate=1553517682585&api=v2)
+**ATENÇÃO:** o **token** também é um parâmetro necessário e você deve, primeiramente, defini-lo na classe **NSSuite.php**, como pode ver abaixo:
 
 Parametros     | Descrição
 :-------------:|:-----------
