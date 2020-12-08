@@ -273,6 +273,60 @@ A função corrigirDocumentoESalvar irá vincular um CCe (carta de correção) a
       }
     }
     
-    inutilizarNumeracaoESalvar
+-----
+
+## Inutilizar Numeração:
+
+### Realizando uma Inutilização de Numeração de um Documento:
+
+Utilizando NFe como exemplo para a inutilização de numeração, deverá ser utilizada a função inutilizarNumeracaoESalvar da classe NSSuite. Veja abaixo sobre os parâmetros necessários, e um exemplo de chamada do método.
+
+##### Parâmetros:
+
+**ATENÇÃO:** o **token** também é um parâmetro necessário e você deve, primeiramente, defini-lo na classe **NSSuite.php**, como pode ver abaixo:
+
+Parametros     | Descrição
+:-------------:|:-----------
+**modelo**            | Conteúdo de emissão do documento.<ul> <li>"57" (CTe);</li> <li>"67" (CTeOS);</li> <li>"65" (NFCe);</li> <li>"55" (NFe);</li> </ul>
+**InutilizarReq**     | JSON contendo as informações de uma requisição de inutilização de numeração
+**caminho**           | Caminho onde devem ser salvos os documentos baixados.
+
+##### Exemplo de chamada:
+
+Após ter todos os parâmetros listados acima, você deverá fazer a chamada da função. Veja o código de exemplo abaixo:
+
+      $NSSuite = new NSSuite;
+      $inutilizarReq = new InutilizarReqNFe();
+      $inutilizarReq->cUF = '43';
+      $inutilizarReq->CNPJ = '07364617000135';
+      $inutilizarReq->tpAmb = '2';
+      $inutilizarReq->ano = '20';
+      $inutilizarReq->serie = '20';
+      $inutilizarReq->nNFIni = '9996'
+      $inutilizarReq->nNFFin = '9996'
+      $inutilizarReq->xJust = 'Inutilizacao realizada para teste de integracao';
+
+      $caminho = '.\Notas';
+      $retorno = $NSSuite->inutilizarNumeracaoESalvar('55', $inutilizarReq, $caminho);
+    
+A função inutilizarNumeracaoESalvar irá inutilizar a numeração do documento, neste caso hipotético, à uma NFe, presentes na classe NSSuite.php. Dessa forma, o retorno será um JSON com os principais campos retornados pelos métodos citados anteriormente. No exemplo abaixo, veja o retorno da nossa API de um inutilização de numeração:
+
+##### Exempo de retorno de correção de documento:
+
+            {
+                  "status": 200,
+                  "motivo": "Consulta realizada com sucesso",
+                  "retornoInutNFe": {
+                        "cStat": "102",
+                        "xMotivo": "Inutilizacao de numero homologado",
+                        "chave": "43111111111111111111111111111111111111111",
+                        "tpAmb": 2,
+                        "dhRecbto": "2016-12-07T17:10:52-02:00",
+                        "nProt": "143160001541466",
+                        "xmlInut": "<?xml version=\"1.0\" encoding=\"utf-8\"?><ProcInutNFe versao=\"3.10\" xmlns=\"http://www.portalfiscal.inf.br/nfe\">...</ProcInutNFe>"
+                  }
+            }
+    
+ 
 
 ![Ns](https://nstecnologia.com.br/blog/wp-content/uploads/2018/11/ns%C2%B4tecnologia.png) | Obrigado pela atenção!
