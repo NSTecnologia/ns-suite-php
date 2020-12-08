@@ -215,64 +215,7 @@ A função corrigirDocumentoESalvar irá vincular um CCe (carta de correção) a
       }
     }
 
------
 
-## Inutilizar Numeração:
-
-### Realizando uma Correção de Documento:
-
-Utilizando NFe como exemplo para a criação de uma carta de correção, deve-se ter em mente que você deverá usar a função corrigirDocumentoESalvar da classe NSSuite. Veja abaixo sobre os parâmetros necessários, e um exemplo de chamada do método.
-
-##### Parâmetros:
-
-**ATENÇÃO:** o **token** também é um parâmetro necessário e você deve, primeiramente, defini-lo na classe **NSSuite.php**, como pode ver abaixo:
-
-Parametros     | Descrição
-:-------------:|:-----------
-**modelo**            | Conteúdo de emissão do documento.<ul> <li>"63" (BPe);</li> <li>"57" (CTe);</li> <li>"67" (CTeOS);</li> <li>"58" (MDFe);</li> <li>"65" (NFCe);</li> <li>"55" (NFe);</li> </ul>
-**CorrigirReq**       | JSON contendo as informações de uma requisição de carta de correção
-**DownloadEventoReq** | JSON contendo as informações de uma requisição de Download de Evento
-**caminho**           | Caminho onde devem ser salvos os documentos baixados.
-**chave**             | Ambiente onde foi autorizado o documento.Valores possíveis:<ul> <li>1 - produção</li> <li>2 - homologação</li> </ul> 
-**nSeqEvento**        | Número sequencial do evento
-**exibeNaTela**       | Se for baixado, exibir o PDF na tela após a autorização.Valores possíveis: <ul> <li>**True** - será exibido</li> <li>**False** - não será exibido</li> </ul> 
-
-##### Exemplo de chamada:
-
-Após ter todos os parâmetros listados acima, você deverá fazer a chamada da função. Veja o código de exemplo abaixo:
-
-    $cceTeste  = new CorrigirReqNFe();
-    $cceTeste->chNFe = '43190207364617000135550000000129281004621862';
-    $cceTeste->dhEvento = '2019-03-06T12:00:00-03:00';
-    $cceTeste->tpAmb = '2';
-    $cceTeste->nSeqEvento = '1';
-    $cceTeste->xCorrecao = 'CC-e realizada para teste de integração';
-
-    $downTeste = new DownloadEventoReqNFe();
-    $downTeste->chNFe = '143190207364617000135550000000129281004621862';
-    $downTeste->tpAmb = '2';
-    $downTeste->nSeqEvento = '1';
-    $downTeste->tpDown = 'XP';
-    $downTeste->tpEvento = 'CCE';
-
-    $retorno = NSSuite->corrigirDocumentoESalvar('55', $cceTeste, $downTeste, './Notas', '43190207364617000135550000000129281004621862', '1', true);
-    
-A função corrigirDocumentoESalvar irá vincular um CCe (carta de correção) ao projeto selecionado, neste caso hipotético, à uma NFe, utilizando as funções corrigirDocumento e downloadEventoESalvar, presentes na classe NSSuite.php. Dessa forma, o retorno será um JSON com os principais campos retornados pelos métodos citados anteriormente. No exemplo abaixo, veja o retorno da nossa API em uma CCe:
-
-##### Exempo de retorno de correção de documento:
-
-    {
-      "status": 200,
-      "motivo": "CC-e vinculada com sucesso",
-      "retEvento": {
-        "cStat": 135,
-        "xMotivo": "Evento registrado e vinculado a NF-e",
-        "chNFe": "43190207364617000135550000000129281004621862",
-        "dhRegEvento": "2019-03-06T12:00:50-03:00",
-        "nProt": "143190000330112"
-      }
-    }
-    
 -----
 
 ## Inutilizar Numeração:
