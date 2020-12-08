@@ -272,5 +272,7 @@ A função corrigirDocumentoESalvar irá vincular um CCe (carta de correção) a
         "nProt": "143190000330112"
       }
     }
+    
+    inutilizarNumeracaoESalvar
 
 ![Ns](https://nstecnologia.com.br/blog/wp-content/uploads/2018/11/ns%C2%B4tecnologia.png) | Obrigado pela atenção!
