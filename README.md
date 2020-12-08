@@ -252,7 +252,7 @@ Após ter todos os parâmetros listados acima, você deverá fazer a chamada da 
       $caminho = '.\Notas';
       $retorno = $NSSuite->inutilizarNumeracaoESalvar('55', $inutilizarReq, $caminho);
     
-A função inutilizarNumeracaoESalvar irá inutilizar a numeração do documento, neste caso hipotético, à uma NFe, presentes na classe NSSuite.php. Dessa forma, o retorno será um JSON com os principais campos retornados pelos métodos citados anteriormente. No exemplo abaixo, veja o retorno da nossa API de um inutilização de numeração:
+A função inutilizarNumeracaoESalvar irá inutilizar a numeração do documento, neste caso hipotético, à uma NFe, presente na classe NSSuite.php. Dessa forma, o retorno será um JSON com os principais campos retornados pelos métodos citados anteriormente. No exemplo abaixo, veja o retorno da nossa API de um inutilização de numeração:
 
 ##### Exempo de retorno de correção de documento:
 
