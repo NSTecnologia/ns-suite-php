@@ -672,7 +672,7 @@ class NSSuite{
 
                     $downloadReqNFe = new DownloadReqNFe();
                     $downloadReqNFe->chNFe = $chNFe;
-                    $downloadReqNFe->tpAmb = $tpDown;
+                    $downloadReqNFe->tpAmb = $tpAmb;
                     $downloadReqNFe->tpDown = $tpDown;
 
                     $resposta = $this->downloadDocumentoESalvar($modelo, $downloadReqNFe, $caminho, $chNFe . '-NFe', $exibeNaTela);
