@@ -52,6 +52,7 @@
 		public $finNFe; //String
 		public $indFinal; //String
 		public $indPres; //String
+		public $indIntermed;
 		public $procEmi; //String
 		public $verProc; //String
 		public $dhCont; //String
@@ -877,6 +878,11 @@
 		public $vTroco; //String
 	}
 
+	class InfIntermed {
+		public $CNPJ; //String
+		public $idCadIntTran //String
+	}
+
 	class ObsCont {
 		public $xCampo; //String
 		public $xTexto; //String
@@ -948,6 +954,7 @@
 		public $transp; //Transp
 		public $cobr; //Cobr
 		public $pag; //Pag
+		public $infIntermed //InfIntermed
 		public $infAdic; //InfAdic
 		public $exporta; //Exporta
 		public $compra; //Compra
