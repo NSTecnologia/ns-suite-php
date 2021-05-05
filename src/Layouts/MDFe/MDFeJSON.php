@@ -1,12 +1,26 @@
 <?php
 
-	class InfMunCarrega {
-		public $cMunCarrega; //String
-		public $xMunCarrega; //String
+	class MDFeJSON {
+		public $MDFe; //MDFe
 	}
 
-	class InfPercurso {
-		public $UFPer; //String
+	class MDFe {
+		public $infMDFe; //InfMDFe 
+	}
+
+	class InfMDFe {
+		public $versao; //String
+		public $Id; //String
+		public $ide; //Ide
+		public $emit; //Emit
+		public $infDoc; //InfDoc
+		public $seg; //array(Seg)
+		public $tot; //Tot
+		public $lacres; //array(Lacre)
+		public $prodPred; //ProdPred 
+		public $autXML; //array(AutXML)
+		public $infAdic; //InfAdic 
+		public $infModal; //InfModal 
 	}
 
 	class Ide {
@@ -29,6 +43,15 @@
 		public $infMunCarrega; //array(InfMunCarrega)
 		public $infPercurso; //array(InfPercurso)
 		public $dhIniViagem; //String
+	}
+
+	class InfMunCarrega {
+		public $cMunCarrega; //String
+		public $xMunCarrega; //String
+	}
+
+	class InfPercurso {
+		public $UFPer; //String
 	}
 
 	class EnderEmit {
@@ -84,7 +107,6 @@
 	class LacUnidTransp {
 		public $nLacre; //String
 	}
-
 
 	class InfUnidCarga {
 		public $tpUnidCarga; //String
@@ -151,6 +173,33 @@
 		public $nLacre; //String
 	}
 
+	class ProdPred {
+		public $tpCarga; //String
+		public $xProd; //String
+		public $cEAN; //String 
+		public $NCM; //String
+		public $infLotacao; //$InfLotacao
+	}
+
+	class InfLotacao {
+		public $infLocalCarrega; //InfLocalCarrega;
+		public $infLocalDescarrega; //InfLocalDescarrega
+	}
+
+	class InfLocalCarrega {
+		public $CEP; //String
+		public $latitude; //String
+		public $longitude; //String
+
+	}
+
+	class InfLocalDescarrega {
+		public $CEP; //String
+		public $latitude; //String
+		public $longitude; //String
+
+	}
+
 	class AutXML {
 		public $CNPJ; //String
 		public $CPF; //String
@@ -180,8 +229,11 @@
 	}
 
 	class InfContratante {
+		public $xNome; //String
 		public $CPF; //String
 		public $CNPJ; //String
+		public $idEstrangeiro; //String 
+
 	}
 
 	class InfANTT {
@@ -189,6 +241,39 @@
 		public $infCIOT; //array(InfCIOT)
 		public $valePed; //ValePed 
 		public $infContratante; //array(InfContratante)
+		public $infPag; //InfPag
+	}
+
+	class InfPag {
+		public $xNome; //String
+		public $CPF; //String
+		public $CNPJ; //String
+		public $idEstrangeiro; //String
+		public $Comp; //COMP
+		public $vContrato; //String
+		public $indPag; //String
+		public $infPrazo; //InfPrazo
+		public $infBanc; //InfBanc
+	}
+
+	class COMP {
+		public $tpComp; //String
+		public $vComp; //String
+		public $xComp; //String
+
+	}
+
+	class InfPrazo {
+		public $nParcela; //String
+		public $dVenc; //String
+		public $vParcela; //String
+	}
+
+	class InfBanc {
+		public $codBanco; //String
+		public $codAgencia; //String
+		public $CNPJIPEF;
+
 	}
 
 	class Prop {
@@ -327,29 +412,4 @@
 		public $versaoModal; //String
 	}
 
-	class InfMDFe
-	{
-		public $versao; //String
-		public $Id; //String
-		public $ide; //Ide
-		public $emit; //Emit
-		public $infDoc; //infDoc
-		public $seg; //array(Seg)
-		public $tot; //Tot
-		public $lacres; //array(Lacre)
-		public $autXML; //array(AutXML)
-		public $infAdic; //InfAdic 
-		public $infModal; //InfModal 
-	}
-
-	class MDFe
-	{
-		public $infMDFe; //InfMDFe 
-	}
-
-	class MDFeJSON
-	{
-		public $MDFe; //MDFe
-	}
 ?>
-
