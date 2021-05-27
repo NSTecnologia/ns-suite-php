@@ -1013,6 +1013,16 @@ class NSSuite{
         return $resposta;
     }
 
+    public function downloadGeral($modelo, $downloadReq, $downloadEventoReq, $caminho, $chave, $nome, $nSeqEvento, $exibeNaTela){
+
+        $respostaDownloadDocumento = $this->downloadDocumentoESalvar($modelo, $downloadReq, $caminho, $nome, $exibeNaTela);
+
+        $respostaDownloadEvento = $this->downloadEventoESalvar($modelo, $downloadEventoReq, $caminho, $chave, $nSeqEvento, $exibeNaTela);
+        
+        return $respostaDownloadDocumento;
+        return $respostaDownloadEvento;
+    }
+
     public function cancelarDocumento($modelo, $cancelarReq) {
         switch ($modelo){
             case '63':

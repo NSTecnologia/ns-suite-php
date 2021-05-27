@@ -880,7 +880,7 @@
 
 	class InfIntermed {
 		public $CNPJ; //String
-		public $idCadIntTran //String
+		public $idCadIntTran; //String
 	}
 
 	class ObsCont {
@@ -954,7 +954,7 @@
 		public $transp; //Transp
 		public $cobr; //Cobr
 		public $pag; //Pag
-		public $infIntermed //InfIntermed
+		public $infIntermed; //InfIntermed
 		public $infAdic; //InfAdic
 		public $exporta; //Exporta
 		public $compra; //Compra

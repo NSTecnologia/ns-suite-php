@@ -318,7 +318,7 @@
 		public $cMunFim; 
 		public $xMunFim; 
         public $UFFim; 
-        public $infPercurso
+        public $infPercurso;
 		public $dhCont; 
 		public $xJust; 
     }
