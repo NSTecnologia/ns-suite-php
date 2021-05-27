@@ -1019,8 +1019,7 @@ class NSSuite{
 
         $respostaDownloadEvento = $this->downloadEventoESalvar($modelo, $downloadEventoReq, $caminho, $chave, $nSeqEvento, $exibeNaTela);
         
-        return $respostaDownloadDocumento;
-        return $respostaDownloadEvento;
+	return array ($respostaDownloadDocumento, $respostaDownloadEvento)
     }
 
     public function cancelarDocumento($modelo, $cancelarReq) {
