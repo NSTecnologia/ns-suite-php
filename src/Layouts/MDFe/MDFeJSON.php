@@ -6,6 +6,7 @@
 
 	class MDFe {
 		public $infMDFe; //InfMDFe 
+		public $infMDFeSupl //InfMDFeSupl
 	}
 
 	class InfMDFe {
@@ -68,6 +69,7 @@
 	}
 
 	class Emit {
+		public $CPF; //String
 		public $CNPJ; //String
 		public $IE; //String
 		public $xNome; //String
@@ -81,6 +83,7 @@
 		public $indReentrega; //String
 		public $infUnidTransp; //array(InfUnidTransp)
 		public $peri; //array(Peri)
+		public $infEntregaParcial //InfEntregaParcial
 	}
 
 	class LacUnidCarga {
@@ -94,6 +97,11 @@
 		public $grEmb; //String
 		public $qTotProd; //String
 		public $qVolTipo; //String
+	}
+
+	class InfEntregaParcial {
+		public $qtdTotal; //String
+		public $qtdParcial; //String
 	}
 
 	class InfNFe {
@@ -190,19 +198,26 @@
 		public $CEP; //String
 		public $latitude; //String
 		public $longitude; //String
-
 	}
 
 	class InfLocalDescarrega {
 		public $CEP; //String
 		public $latitude; //String
 		public $longitude; //String
-
 	}
 
 	class AutXML {
 		public $CNPJ; //String
 		public $CPF; //String
+	}
+
+	class InfRespTec {
+		public $CNPJ; //String
+		public $xContato; //String
+		public $email; //String
+		public $fone; //String
+		public $idCSRT; //String
+		public $hashCSRT; //String
 	}
 
 	class InfAdic {
@@ -222,6 +237,8 @@
 		public $CPFPg; //String
 		public $nCompra; //String
 		public $vValePed; //String
+		public $tpValePed; //String
+		public $categCombVeic; //String
 	}
 
 	class ValePed {
@@ -233,7 +250,6 @@
 		public $CPF; //String
 		public $CNPJ; //String
 		public $idEstrangeiro; //String 
-
 	}
 
 	class InfANTT {
@@ -251,7 +267,9 @@
 		public $idEstrangeiro; //String
 		public $Comp; //COMP
 		public $vContrato; //String
+		public $indAltoDesemp; //String
 		public $indPag; //String
+		public $vAdiant; //String
 		public $infPrazo; //InfPrazo
 		public $infBanc; //InfBanc
 	}
@@ -260,7 +278,6 @@
 		public $tpComp; //String
 		public $vComp; //String
 		public $xComp; //String
-
 	}
 
 	class InfPrazo {
@@ -272,8 +289,8 @@
 	class InfBanc {
 		public $codBanco; //String
 		public $codAgencia; //String
-		public $CNPJIPEF;
-
+		public $CNPJIPEF; //String
+		public $PIX; //Sitrng
 	}
 
 	class Prop {
@@ -410,6 +427,10 @@
 		public $aquav; //Aquav 
 		public $ferrov; //Ferrov 
 		public $versaoModal; //String
+	}
+
+	class InfMDFeSupl {
+		public $qrCodMDFe; //String 
 	}
 
 ?>
