@@ -6,7 +6,7 @@
 
 	class MDFe {
 		public $infMDFe; //InfMDFe 
-		public $infMDFeSupl //InfMDFeSupl
+		public $infMDFeSupl; //InfMDFeSupl
 	}
 
 	class InfMDFe {
@@ -83,7 +83,7 @@
 		public $indReentrega; //String
 		public $infUnidTransp; //array(InfUnidTransp)
 		public $peri; //array(Peri)
-		public $infEntregaParcial //InfEntregaParcial
+		public $infEntregaParcial; //InfEntregaParcial
 	}
 
 	class LacUnidCarga {

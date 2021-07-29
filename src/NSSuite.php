@@ -48,8 +48,8 @@ class NSSuite {
         
         //Marca que vai enviar por POST(1=SIM)->
         curl_setopt($ch, CURLOPT_POST, 1);
-	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	    //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	    //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         
         //Passa um json para o campo de envio POST->
         curl_setopt($ch, CURLOPT_POSTFIELDS, $conteudoAEnviar);
@@ -321,12 +321,12 @@ class NSSuite {
         return $retorno;
     }
 
-    public function informarGTV($modelo, $infGTVReqCTe) {
+    public function informarGTVe($modelo, $infGTVReqCTe) {
         switch ($modelo)
         {
             case '57':
             case '67':
-                $urlInfGTV = $this->$endpoints->CTeCancelamento;
+                $urlInfGTV = $this->endpoints->CTeCancelamento;
                 break;
             
             default: 
@@ -338,7 +338,7 @@ class NSSuite {
         $this->genericos->gravarLinhaLog($modelo, '[INFORMACOES_GTV_DADOS]');
         $this->genericos->gravarLinhaLog($modelo, $json);
 
-        $resposta = enviaConteudoParaAPI($json, $urlInfGTV, 'json');
+        $resposta = $this->enviaConteudoParaAPI($json, $urlInfGTV, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[INFORMACOES_GTV_DADOS]');
         $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
@@ -346,8 +346,8 @@ class NSSuite {
         return $resposta;
     }
 
-    public function informatGTVESalvar($modelo, $infGTVReqCTe, $downloadEventoReq, $caminho, $chave, $exibeNaTela) {
-        $resposta = informarGTV($modelo, $infGTVReqCTe);
+    public function informarGTVESalvar($modelo, $infGTVReqCTe, $downloadEventoReq, $caminho, $chave, $exibeNaTela) {
+        $resposta = $this->informarGTVe($modelo, $infGTVReqCTe);
         $status = $resposta['status'];
 
         if ($status == 200){
@@ -870,8 +870,8 @@ class NSSuite {
                 if(substr($caminho, -1) != '/') $caminho= $caminho . '/';
             }catch(Exception $e){
                 $this->genericos->gravarLinhaLog($modelo, '[CRIA_DIRETORIO] '+ $caminho);
-                $this->genericos->gravarLinhaLog($modelo, $e.getMessage());
-                throw new Exception('Exceção capturada: ' + $e.getMessage());
+                $this->genericos->gravarLinhaLog($modelo, $e->getMessage());
+                throw new Exception('Exceção capturada: ' + $e->getMessage());
             }
 
             if ($modelo != '65') {
@@ -911,7 +911,6 @@ class NSSuite {
                 break;
 
             case '57':
-            case '67':
                 $urlDownloadEvento = $this->endpoints->CTeDownloadEvento;
                 break;
 
@@ -928,7 +927,7 @@ class NSSuite {
                 break;
 
             default:
-                throw new Exception('Não definido endpoint de download de evento para o modelo ' + modelo);
+                throw new Exception('Não definido endpoint de download de evento para o modelo ' + $modelo);
         }
 
         $json = json_encode((array) $downloadEventoReq, JSON_UNESCAPED_UNICODE);
@@ -1153,12 +1152,12 @@ class NSSuite {
 
     public function inutilizarNumeracaoESalvar($modelo, $inutilizarReq, $caminho) {
         $resposta = $this->inutilizarNumeracao($modelo, $inutilizarReq);
-        $status = resposta['status'];
+        $status = $resposta['status'];
         $xml = null;
  
         if ($status == 102 || $status == 200){
 
-            $cStat = resposta['cStat'];
+            $cStat = $resposta['cStat'];
 
             if ($cStat == 102){
 
