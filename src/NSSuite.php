@@ -26,7 +26,7 @@ require('./src/Retornos/MDFe/EmitirSincronoRetMDFe.php');
 require('./src/Retornos/NFCe/EmitirSincronoRetNFCe.php');
 require('./src/Retornos/NFe/EmitirSincronoRetNFe.php');
 
-class NSSuite{
+class NSSuite {
 
     private $token;
     private $parametros;
@@ -37,10 +37,10 @@ class NSSuite{
         $this->parametros = new Parametros(1);
         $this->endpoints = new Endpoints;
         $this->genericos = new Genericos;
-        $this->token = 'COLOQUE_TOKEN';
+        $this->token = 'INSIRA_SEU_TOKEN';
     }
 
-    // Esta função envia um conteúdo para uma URL, em requisições do tipo POST
+    // Esta funcao envia um conteudo para uma URL, em requisicoes do tipo POST
     private function enviaConteudoParaAPI($conteudoAEnviar, $url, $tpConteudo){
 
         //Inicializa cURL para uma URL->
@@ -48,6 +48,8 @@ class NSSuite{
         
         //Marca que vai enviar por POST(1=SIM)->
         curl_setopt($ch, CURLOPT_POST, 1);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         
         //Passa um json para o campo de envio POST->
         curl_setopt($ch, CURLOPT_POSTFIELDS, $conteudoAEnviar);
@@ -63,7 +65,7 @@ class NSSuite{
         //Marca que vai receber string
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         
-        //Inicia a conexão
+        //Inicia a conexao
         $result = curl_exec($ch);
         
         if (curl_error($ch)) {
@@ -76,13 +78,13 @@ class NSSuite{
             var_dump(curl_error($ch));
         }
 
-        //Fecha a conexão
+        //Fecha a conexao
         curl_close($ch);
 
         return json_decode($result, true);
     }
     
-    // Métodos específicos de BPe
+    // Metodos especificos de BPe
     public function emitirBPeSincrono($conteudo, $tpConteudo, $CNPJ, $tpDown, $tpAmb, $caminho, $exibeNaTela){
         $modelo = '63';
         $resposta = $this->emitirDocumento($modelo, $conteudo, $tpConteudo);
@@ -108,6 +110,7 @@ class NSSuite{
             $consStatusProcessamento->CNPJ = $CNPJ;
             $consStatusProcessamento->nsNRec = $nsNRec;
             $consStatusProcessamento->tpAmb = $tpAmb;
+
             $resposta = $this->consultarStatusProcessamento($modelo, $consStatusProcessamento);
             $statusConsulta = $resposta['status'];
 
@@ -194,7 +197,7 @@ class NSSuite{
         $this->genericos->gravarLinhaLog($modelo, '[NAO_EMBARQUE_DADOS]');
         $this->genericos->gravarLinhaLog($modelo, $json);
 
-        $resposta = $this->enviaConteudoParaAPI($json, $urlConsulta, 'json');
+        $resposta = $this->enviaConteudoParaAPI($json, $urlNaoEmb, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[NAO_EMBARQUE_RESPOSTA]');
         $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
@@ -625,8 +628,7 @@ class NSSuite{
         return $retorno;
     }
 
-
-    // Métodos específicos de NFe
+    // Metodos especificos de NFe
     public function emitirNFeSincrono($conteudo, $tpConteudo, $CNPJ, $tpDown, $tpAmb, $caminho, $exibeNaTela) {
 
         $modelo = '55';
@@ -690,27 +692,32 @@ class NSSuite{
             }else{
                 $motivo = $resposta['motivo'];
             }
-        }else if ($statusEnvio == -7){
+        }
+        else if ($statusEnvio == -7){
 
             $motivo = $resposta['motivo'];
             $nsNRec = $resposta['nsNRec'];
 
-        }else if ($statusEnvio == -4 || $statusEnvio == -2) {
+        }
+        else if ($statusEnvio == -4 || $statusEnvio == -2) {
 
             $motivo = $resposta['motivo'];
             $erros = $resposta['erros'];
 
-        }else if ($statusEnvio == -999 || $statusEnvio == -5) {
+        }
+        else if ($statusEnvio == -999 || $statusEnvio == -5) {
 
             $motivo = $resposta['erro']['xMotivo'];
 
-        }else{
+        } 
+        else {
             try {
                 $motivo = $resposta['motivo'];
             }catch (Exception $ex){
                 $motivo = $resposta;
             }
         }
+
         $emitirSincronoRetNFe = new EmitirSincronoRetNFe();
         $emitirSincronoRetNFe->statusEnvio = $statusEnvio;
         $emitirSincronoRetNFe->statusConsulta = $statusConsulta;
@@ -732,7 +739,6 @@ class NSSuite{
 
         return $retorno;
     }
-
 
     // Métodos genéricos, compartilhados entre diversas funções
     public function emitirDocumento($modelo, $conteudo, $tpConteudo){
@@ -782,7 +788,6 @@ class NSSuite{
                 break;
                 
             case '57':
-            case '67': 
                 $urlConsulta = $this->endpoints->CTeConsStatusProcessamento;
                 break;
             
@@ -818,7 +823,6 @@ class NSSuite{
                 break;
             
             case '57':
-            case '67': 
                 $urlDownload = $this->endpoints->CTeDownload;
                 break;
             
@@ -862,7 +866,7 @@ class NSSuite{
         $status = $resposta['status'];
         if (($status == 200) || ($status == 100)) {
             try{
-                if (strlen($caminho) > 0) if (!file_exists($caminho)) mkdir($caminho, true);
+                if (strlen($caminho) > 0) if (!file_exists($caminho)) mkdir($caminho, 0777, true);
                 if(substr($caminho, -1) != '/') $caminho= $caminho . '/';
             }catch(Exception $e){
                 $this->genericos->gravarLinhaLog($modelo, '[CRIA_DIRETORIO] '+ $caminho);
@@ -948,21 +952,20 @@ class NSSuite{
 
     public function downloadEventoESalvar($modelo, $downloadEventoReq, $caminho, $chave, $nSeqEvento, $exibeNaTela) {
         $tpEventoSalvar = '';
-
         $resposta = $this->downloadEvento($modelo, $downloadEventoReq);
         $status = $resposta['status'];
-
         if ($status == 200 || $status == 100){
 
             try{
-                if (strlen($caminho) > 0) if (!file_exists($caminho)) mkdir($caminho, true);
+                if (strlen($caminho) > 0) if (!file_exists($caminho)) mkdir($caminho, 0777, true);
                 if (substr($caminho, -1) != '/') $caminho= $caminho . '/';
 
-            }catch (Exception $ex){
+            }
+	    catch (Exception $ex){
 
                 $this->genericos->gravarLinhaLog($modelo, '[CRIA_DIRETORIO] '+ $caminho);
-                $this->genericos->gravarLinhaLog($modelo, $ex.getMessage());
-                throw new Exception('Exceção capturada: ' . $ex.getMessage());
+                $this->genericos->gravarLinhaLog($modelo, $ex->getMessage());
+                throw new Exception('Exceção capturada: ' . $ex->getMessage());
             }
 
 
@@ -1012,39 +1015,38 @@ class NSSuite{
         }
         return $resposta;
     }
-
+        
     public function downloadGeral($modelo, $downloadReq, $downloadEventoReq, $caminho, $chave, $nome, $nSeqEvento, $exibeNaTela){
 
         $respostaDownloadDocumento = $this->downloadDocumentoESalvar($modelo, $downloadReq, $caminho, $nome, $exibeNaTela);
 
         $respostaDownloadEvento = $this->downloadEventoESalvar($modelo, $downloadEventoReq, $caminho, $chave, $nSeqEvento, $exibeNaTela);
         
-	return array ($respostaDownloadDocumento, $respostaDownloadEvento);
-
+        return array ($respostaDownloadDocumento, $respostaDownloadEvento);
     }
 
     public function cancelarDocumento($modelo, $cancelarReq) {
         switch ($modelo){
-            case '63':
-                $urlCancelamento = $this->endpoints->BPeCancelamento;
-                break;    
-
-            case '57':
-            case '67':
-                $urlCancelamento = $this->endpoints->CTeCancelamento;
-                break;
             
-            case '58':
-                $urlCancelamento = $this->endpoints->MDFeCancelamento;
-                break;
-            
-            case '65':
-                $urlCancelamento = $this->endpoints->NFCeCancelamento;
-                break;   
+	    case '63':
+            $urlCancelamento = $this->endpoints->BPeCancelamento;
+            break;    
 
-            case '55':
-                $urlCancelamento = $this->endpoints->NFeCancelamento;
-                 break;
+        case '67':
+            $urlCancelamento = $this->endpoints->CTeCancelamento;
+            break;
+        
+        case '58':
+            $urlCancelamento = $this->endpoints->MDFeCancelamento;
+            break;
+        
+        case '65':
+            $urlCancelamento = $this->endpoints->NFCeCancelamento;
+            break;   
+
+        case '55':
+            $urlCancelamento = $this->endpoints->NFeCancelamento;
+                break;
 
             default:
                 throw new Exception('Não definido endpoint de cancelamento para o modelo ' . $modelo);
@@ -1193,7 +1195,7 @@ class NSSuite{
         {
             if (strlen($caminho) > 0) if (!file_exists($caminho)) mkdir($caminho, true);
             if(substr($caminho, -1) != '/') $caminho= $caminho . '/';
-            $this->genericos->salvarXML($xml, $caminho, $nome);
+            $this->genericos->salvaXML($xml, $caminho, $nome);
         }
 
         return $resposta;
@@ -1203,7 +1205,6 @@ class NSSuite{
 
         switch ($modelo){
             case '57':
-            case '67':
                 $urlConsCad = $this->endpoints->CTeConsCad;
                 break;
 

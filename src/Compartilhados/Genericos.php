@@ -3,9 +3,11 @@ class Genericos{
 
 	public function gravarLinhaLog($modelo, $msg){
 		$dir = './log/';
+		date_default_timezone_set("America/Sao_Paulo");
 		if(!file_exists($dir)) mkdir($dir);
 		$arq = fopen($dir.date('Ymd').'.log', 'a+');
-	    $msg = sprintf("[%s][%s]: %s%s", date('Y/m/d H:i:s'), $modelo, $msg, PHP_EOL);
+		$today = date('Y/m/d H:i:s');
+	    $msg = sprintf("[%s][%s]: %s%s", $today, $modelo, $msg, PHP_EOL);
 	    fwrite($arq, $msg);
 	    fclose($arq);
 	}	
@@ -40,6 +42,16 @@ class Genericos{
 		header('Accept-Ranges: bytes');
 
 		@readfile($file);
+	}
+
+	public function dhEmiGet() {
+
+		date_default_timezone_set("America/Sao_Paulo");
+    	$date = date("Y-m-d");
+    	$time = date("H:i:s");
+    	$today = $date."T".$time."-03:00";
+
+    	return $today;
 	}
 }
 ?>
