@@ -1,5 +1,6 @@
 <?php
 class Endpoints {
+    // BP-e
     public $BPeEnvio = 'https://bpe.ns.eti.br/v1/bpe/issue';
     public $BPeConsStatusProcessamento  = 'https://bpe.ns.eti.br/v1/bpe/issue/status';
     public $BPeDownload  = 'https://bpe.ns.eti.br/v1/bpe/get';
@@ -7,6 +8,8 @@ class Endpoints {
     public $BPeCancelamento  = 'https://bpe.ns.eti.br/v1/bpe/cancel';
     public $BPeNaoEmb  = 'https://bpe.ns.eti.br/v1/bpe/naoemb';
     public $BPeConsSit  = 'https://bpe.ns.eti.br/v1/bpe/status';
+    public $BPeAltPoltrona = 'https://bpe.ns.eti.br/v1/bpe/alterpol';
+    public $BPeExcBagagem = 'https://bpe.ns.eti.br/v1/bpe/excessobag';
 
     // CT-e
     public $CTeEnvio  = 'https://cte.ns.eti.br/cte/issue';

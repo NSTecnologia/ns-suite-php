@@ -10,7 +10,8 @@ class Genericos{
 	    $msg = sprintf("[%s][%s]: %s%s", $today, $modelo, $msg, PHP_EOL);
 	    fwrite($arq, $msg);
 	    fclose($arq);
-	}	
+	}
+	
     public function salvaJSON($json, $caminho, $nome){
         $localSalvar = $caminho . $nome . '.json';
 		$fp = fopen($localSalvar, 'w+');

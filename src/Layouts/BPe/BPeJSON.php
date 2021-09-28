@@ -235,6 +235,15 @@
         public $CPF; //String
     }
 
+    class InfRespTec {
+        public $CNPJ; //String
+        public $xContato; //String
+        public $email; //String
+        public $fone; //String
+        public $idCSRT; //String
+        public $hashCSRT; //String
+    }
+
     class InfAdic {
         public $infAdFisco; //String
         public $infCpl; //String

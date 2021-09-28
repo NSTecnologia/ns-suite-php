@@ -37,7 +37,7 @@ class NSSuite {
         $this->parametros = new Parametros(1);
         $this->endpoints = new Endpoints;
         $this->genericos = new Genericos;
-        $this->token = 'INSIRA_SEU_TOKEN';
+        $this->token = '';
     }
 
     // Esta funcao envia um conteudo para uma URL, em requisicoes do tipo POST
@@ -48,8 +48,8 @@ class NSSuite {
         
         //Marca que vai enviar por POST(1=SIM)->
         curl_setopt($ch, CURLOPT_POST, 1);
-	    //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	    //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         
         //Passa um json para o campo de envio POST->
         curl_setopt($ch, CURLOPT_POSTFIELDS, $conteudoAEnviar);
@@ -216,7 +216,75 @@ class NSSuite {
         }
         return $resposta;
     }
+ 
+    // Método Altera Poltrona BP-e
+    public function alteraPoltrona($modelo, $AlteraPoltReqBPe) {
+        switch ($modelo){
+            case '63':
+                $urlAltPoltrona = $this->endpoints->BPeAltPoltrona;
+                break;
+            
+            default: 
+                throw new Exception('Não definido endpoint de altera poltrona para o modelo ' . $modelo);   
+        }
+        
+        $json = json_encode((array) $AlteraPoltReqBPe, JSON_UNESCAPED_UNICODE);
 
+        $this->genericos->gravarLinhaLog($modelo, '[ALTERA_POLTRONA_DADOS]');
+        $this->genericos->gravarLinhaLog($modelo, $json);
+
+        $resposta = $this->enviaConteudoParaAPI($json, $urlAltPoltrona, 'json');
+
+        $this->genericos->gravarLinhaLog($modelo, '[ALTERA_POLTRONA_RESPOSTA]');
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
+        return $resposta;
+    }
+
+    public function alteraPoltronaESalvar($modelo, $AlteraPoltReqBPe, $downloadEventoReq, $caminho, $chave, $exibeNaTela) {
+        $resposta = $this->alteraPoltrona($modelo, $AlteraPoltReqBPe);
+        $status = $resposta['status'];
+
+        if ($status == 200){
+            $cStat = $resposta['retEvento']['cStat'];
+            if ($cStat == 135){
+                $respostaDownloadEvento = $this->downloadEventoESalvar($modelo, $downloadEventoReq, $caminho, $chave, '', $exibeNaTela);
+            }
+        }
+        return $resposta;
+    }
+
+    // Método Excesso Bagagem BP-e
+    public function excessoBagagem($modelo, $ExcBagagemReqBPe) {
+        $urlExcBagagem = $this->endpoints->BPeExcBagagem;
+        
+        $json = json_encode((array) $ExcBagagemReqBPe, JSON_UNESCAPED_UNICODE);
+
+        $this->genericos->gravarLinhaLog($modelo, '[EXCESSO_BAGAGEM_DADOS]');
+        $this->genericos->gravarLinhaLog($modelo, $json);
+
+        $resposta = $this->enviaConteudoParaAPI($json, $urlExcBagagem, 'json');
+
+        $this->genericos->gravarLinhaLog($modelo, '[[EXCESSO_BAGAGEM_DADOS]');
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
+        return $resposta;
+    }
+
+    public function excessoBagagemESalvar($modelo, $ExcBagagemReqBPe, $caminho, $chave, $exibeNaTela) {
+        $resposta = $this->excessoBagagem($modelo, $ExcBagagemReqBPe);
+        $status = $resposta['status'];
+
+        if ($status == 200){
+
+            $cStat = $resposta['retEvento']['cStat'];
+
+            if ($cStat == 135){
+                $xml = $resposta['retEvento']['xml'];
+                $nomeArquivo = "110117".$resposta['retEvento']['chBPe']."-procEvenBPe";
+                $this->genericos->salvaXML($xml, $caminho, $nomeArquivo);
+            };
+        }
+        return $resposta;
+    }
 
     // Métodos específicos de CTe
     public function emitirCTeSincrono($conteudo, $mod, $tpConteudo, $CNPJ, $tpDown, $tpAmb, $caminho, $exibeNaTela) {
@@ -1120,8 +1188,8 @@ class NSSuite {
     public function inutilizarNumeracao($modelo, $inutilizarReq) {
 
         switch ($modelo){
+            
             case '57':
-            case '67':
                 $urlInutilizacao = $this->endpoints->CTeInutilizacao;
                 break;
 
@@ -1157,14 +1225,13 @@ class NSSuite {
  
         if ($status == 102 || $status == 200){
 
-            $cStat = $resposta['cStat'];
+            $cStat = $resposta['retornoInutNFe']['cStat'];
 
             if ($cStat == 102){
 
                 switch ($modelo){
 
                     case '57':
-                    case '67':
                         $xml = $resposta['retornoInutCTe']['xmlInut'];
                         $chave = $resposta['retornoInutCTe']['chave'];
                         $nome = $chave . '-inutCTe';
@@ -1186,13 +1253,15 @@ class NSSuite {
                         throw new Exception('Nao existe inutilização para este modelo ' . $modelo);
                 }
             }
-        }else{
+        }
+        else
+        {
             echo'Ocorreu um erro ao inutilizar a numeração, veja o retorno da API para mais informações';
         }
 
         if ($xml != null)
         {
-            if (strlen($caminho) > 0) if (!file_exists($caminho)) mkdir($caminho, true);
+            if (strlen($caminho) > 0) if (!file_exists($caminho)) mkdir($caminho, true, 0777);
             if(substr($caminho, -1) != '/') $caminho= $caminho . '/';
             $this->genericos->salvaXML($xml, $caminho, $nome);
         }
@@ -1328,32 +1397,6 @@ class NSSuite {
 
         return $resposta;
     
-    }
-    
-    public function xmlTributos($modelo, $conteudo, $tpConteudo){
-        switch ($modelo)
-        {
-            case '55':
-                $urlTributos = $this->endpoints->NFeNSTributos;
-                break;
-            default:
-                throw new Exception('Não definido endpoint do NS Tributos para o modelo ' . $modelo);
-
-        }
-        $this->genericos->gravarLinhaLog($modelo, '[GERAR_TRIBUTOS_DADOS]');
-        $this->genericos->gravarLinhaLog($modelo, $conteudo);
-
-        $resposta = $this->enviaConteudoParaAPI($conteudo, $urlTributos, $tpConteudo);
-
-        $this->genericos->gravarLinhaLog($modelo, '[GERAR_TRIBUTOS_RESPOSTA]');
-        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
-
-        $statusEnvio = $resposta['status'];
-
-        if ($statusEnvio == 200){   
-            return $resposta['xml'];
-        }
-        return $resposta;
     }
 }
 ?>
