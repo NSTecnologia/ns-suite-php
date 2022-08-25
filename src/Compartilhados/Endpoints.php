@@ -24,6 +24,7 @@ class Endpoints {
     public $CTeInfGTV  = 'https://cte.ns.eti.br/cte/gtv';
     public $CTeInutilizacao  = 'https://cte.ns.eti.br/cte/inut';
     public $CTeListarNSNRecs  = 'https://cte.ns.eti.br/util/list/nsnrecs';
+    public $CTePrevia = "https://cte.ns.eti.br/util/previa/cte";
 
     // DDF-e
     public $DDFeDesacordo  = 'https://ddfe.ns.eti.br/events/cte/disagree';
@@ -51,6 +52,7 @@ class Endpoints {
     public $NFCeConsSit  = 'https://nfce.ns.eti.br/v1/nfce/status';
     public $NFCeEnvioEmail  = 'https://nfce.ns.eti.br/v1/util/resendemail';
     public $NFCeInutilizacao  = 'https://nfce.ns.eti.br/v1/nfce/inut';
+    public $NFCePrevia = "https://nfce.ns.eti.br/v1/util/preview/nfce";
 
     // NF-e
     public $NFeEnvio  = 'https://nfe.ns.eti.br/nfe/issue';

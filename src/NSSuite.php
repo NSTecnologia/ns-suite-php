@@ -37,7 +37,7 @@ class NSSuite {
         $this->parametros = new Parametros(1);
         $this->endpoints = new Endpoints;
         $this->genericos = new Genericos;
-        $this->token = '';
+        $this->token = 'SEU_TOKEN_AQUI';
     }
 
     // Esta funcao envia um conteudo para uma URL, em requisicoes do tipo POST
@@ -1393,6 +1393,52 @@ class NSSuite {
         $resposta = $this->enviaConteudoParaAPI($json, $urlEnviarEmail, 'json');
 
         $this->genericos->gravarLinhaLog($modelo, '[ENVIO_EMAIL_RESPOSTA]');
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
+
+        return $resposta;
+    
+    }
+
+    public function previaDocumentoESalvar($conteudo, $modelo, $tpConteudo, $caminho, $nome, $exibeNaTela) {
+        switch ($modelo)
+        {
+            case '55':
+                $urlEnviarPrevia = $this->endpoints->NFePrevia;
+                break;
+
+            case '65':
+                $urlEnviarPrevia = $this->endpoints->NFCePrevia;
+                break;
+
+            case '57':
+                $urlEnviarPrevia = $this->endpoints->CTePrevia;
+                break;
+
+            case '58':
+                $urlEnviarPrevia = $this->endpoints->MDFePrevia;
+                break;    
+            default:
+                throw new Exception('Não definido endpoint de envio da Previa para o modelo ' . $modelo);
+        }
+
+        $this->genericos->gravarLinhaLog($modelo, '[ENVIA_DADOS]');
+        $this->genericos->gravarLinhaLog($modelo, $conteudo);
+
+        $resposta = $this->enviaConteudoParaAPI($conteudo, $urlEnviarPrevia, $tpConteudo);
+        $status = $resposta['status'];
+
+        if (($status == 200)){
+            $pdf = $resposta['pdf'];
+                    $this->genericos->salvaPDF($pdf, $caminho, $nome);
+            $xml = $resposta['xml'];
+                    $this->genericos->salvaXML($xml, $caminho, $nome);       
+                    
+            if ($exibeNaTela) {
+                $this->genericos->exibirNaTela($caminho, $nome);
+            }
+        }
+
+        $this->genericos->gravarLinhaLog($modelo, '[ENVIA_RESPOSTA]');
         $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
 
         return $resposta;
