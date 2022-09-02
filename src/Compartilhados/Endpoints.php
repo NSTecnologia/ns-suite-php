@@ -10,6 +10,7 @@ class Endpoints {
     public $BPeConsSit  = 'https://bpe.ns.eti.br/v1/bpe/status';
     public $BPeAltPoltrona = 'https://bpe.ns.eti.br/v1/bpe/alterpol';
     public $BPeExcBagagem = 'https://bpe.ns.eti.br/v1/bpe/excessobag';
+    public $BPeTMEnvio = 'https://bpe.ns.eti.br/v1/bpetm/issue';
 
     // CT-e
     public $CTeEnvio  = 'https://cte.ns.eti.br/cte/issue';

@@ -85,6 +85,103 @@ class NSSuite {
     }
     
     // Metodos especificos de BPe
+    public function emitirBPeTMSincrono($conteudo, $tpConteudo, $CNPJ, $tpDown, $tpAmb, $caminho, $exibeNaTela){
+        $modelo = '63';
+        $resposta = $this->emitirDocumentoBPeTM($modelo, $conteudo, $tpConteudo);
+        $statusEnvio = $resposta['status'];
+        $statusConsulta= null;
+        $statusDownload= null;
+        $cStat= null;
+        $chBPe= null;
+        $nProt= null;
+        $motivo= null;
+        $nsNRec= null;
+        $erros= null;
+
+        $this->genericos->gravarLinhaLog($modelo, '[EMISSAO_SINCRONA_INICIO]');
+
+        if ($statusEnvio == 200 || $statusEnvio == -6) {
+            $nsNRec = $resposta['nsNRec'];
+            
+            // É necessário aguardar alguns milisegundos antes de consultar o status de processamento
+            sleep($this->parametros->TEMPO_ESPERA);
+
+            $consStatusProcessamento = new ConsStatusProcessamentoReqBPe;
+            $consStatusProcessamento->CNPJ = $CNPJ;
+            $consStatusProcessamento->nsNRec = $nsNRec;
+            $consStatusProcessamento->tpAmb = $tpAmb;
+
+            $resposta = $this->consultarStatusProcessamento($modelo, $consStatusProcessamento);
+            $statusConsulta = $resposta['status'];
+
+            if ($statusConsulta == 200) {
+
+                $cStat = $resposta['cStat'];
+
+                if ($cStat == 100) {
+
+                    $chBPe = $resposta['chBPe'];
+                    $nProt = $resposta['nProt'];
+                    $motivo = $resposta['xMotivo'];
+
+                    $downloadBPe = new DownloadReqBPe;
+                    $downloadBPe->chBPe = $chBPe;
+                    $downloadBPe->tpAmb = $tpAmb;
+                    $downloadBPe->tpDown = $tpDown;
+
+                    $resposta = $this->downloadDocumentoESalvar($modelo, $downloadBPe, $caminho, $chBPe . '-BPe', $exibeNaTela);
+                    $statusDownload = $resposta['status'];
+
+                    if ($statusDownload != 200) $motivo = $resposta['motivo']; 
+                } else {
+
+                    $motivo = $resposta['xMotivo'];
+                }
+            } elseif ($statusConsulta == -2) {
+
+                $cStat = $resposta['cStat'];
+                $motivo = $resposta['erro']['motivo'];
+            } else {
+
+                $motivo = $resposta['motivo'];
+            }
+        } elseif ($statusEnvio == -5){
+            
+            $cStat = $resposta['erro']['cStat'];
+            $motivo = $resposta['erro']['xMotivo'];
+
+        } elseif ($statusEnvio == -4 || $statusEnvio == -2) {
+
+            $motivo = $resposta['motivo'];
+            $erros = $resposta['erros'];
+
+        } else {
+            try{
+                $motivo = $resposta['motivo'];
+            }catch(Exception $ex){
+                $motivo = $resposta;
+            }
+        }
+
+        $emitirSincronoRetBPe = new EmitirSincronoRetBPe;
+        $emitirSincronoRetBPe->statusEnvio = $statusEnvio;
+        $emitirSincronoRetBPe->statusConsulta = $statusConsulta;
+        $emitirSincronoRetBPe->statusDownload = $statusDownload;
+        $emitirSincronoRetBPe->cStat = $cStat;
+        $emitirSincronoRetBPe->chBPe = $chBPe;
+        $emitirSincronoRetBPe->nProt = $nProt;
+        $emitirSincronoRetBPe->motivo = $motivo;
+        $emitirSincronoRetBPe->nsNRec = $nsNRec;
+        $emitirSincronoRetBPe->erros = $erros;
+        
+        $emitirSincronoRetBPe = array_filter((array) $emitirSincronoRetBPe);
+        $retorno = json_encode($emitirSincronoRetBPe, JSON_UNESCAPED_UNICODE);
+        $this->genericos->gravarLinhaLog($modelo, '[JSON_RETORNO]');
+        $this->genericos->gravarLinhaLog($modelo, $retorno);
+        $this->genericos->gravarLinhaLog($modelo, '[EMISSAO_SINCRONA_FIM]');
+        return $retorno;
+    }
+
     public function emitirBPeSincrono($conteudo, $tpConteudo, $CNPJ, $tpDown, $tpAmb, $caminho, $exibeNaTela){
         $modelo = '63';
         $resposta = $this->emitirDocumento($modelo, $conteudo, $tpConteudo);
@@ -832,6 +929,28 @@ class NSSuite {
             
             case '55': 
                 $urlEnvio = $this->endpoints->NFeEnvio;
+                break;
+            
+            default: 
+                throw new Exception('Não definido endpoint de envio para o modelo ' . $modelo);         
+        }
+
+        $this->genericos->gravarLinhaLog($modelo, '[ENVIA_DADOS]');
+        $this->genericos->gravarLinhaLog($modelo, $conteudo);
+
+        $resposta = $this->enviaConteudoParaAPI($conteudo, $urlEnvio, $tpConteudo);
+
+        $this->genericos->gravarLinhaLog($modelo, '[ENVIA_RESPOSTA]');
+        $this->genericos->gravarLinhaLog($modelo, json_encode($resposta));
+
+        return $resposta;
+    }
+
+    public function emitirDocumentoBPeTM($modelo, $conteudo, $tpConteudo){
+        
+        switch($modelo){
+            case '63':
+                $urlEnvio = $this->endpoints->BPeTMEnvio;
                 break;
             
             default: 
