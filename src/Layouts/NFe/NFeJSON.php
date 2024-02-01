@@ -959,6 +959,7 @@
 		public $exporta; //Exporta
 		public $compra; //Compra
 		public $cana; //Cana
+		public $infRespTec;
 	}
 
 	class NFe {
@@ -968,4 +969,12 @@
 	class NFeJSON {
 		public $NFe; //NFe
 	}
+
+	class Infresptec {
+		public $CNPJ;
+		public $xContato;
+		public $email;
+		public $fone;
+	}
+
 ?>
