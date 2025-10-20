@@ -62,6 +62,7 @@
 		public $toma4; //Toma4 
 		public $dhCont; //String
 		public $xJust; //String
+		public $gCompraGov; //String
 	}
 
 	class Pass {
@@ -171,7 +172,7 @@
 		public $xPais; //String
 	}
 
-	class Rem {
+	class Remetente {
 		public $CNPJ; //String
 		public $CPF; //String
 		public $IE; //String
@@ -338,6 +339,8 @@
 		public $vTotTrib; //String
 		public $infAdFisco; //String
 		public $ICMSUFFim; //ICMSUFFim
+		public $vTotDFe; //String
+		public $IBSCBS; //IBSCBS
 	}
 
 	class InfQ {
@@ -507,12 +510,12 @@
 		public $xObs; //String
 	}
 
-	class InfCTeMultimodal {
+	class InfCteMultimodal {
 		public $chCTeMultimodal; //String
 	}
 
 	class InfServVinc {
-		public $infCTeMultimodal; //array(InfCTeMultimodal)
+		public $infCteMultimodal; //array(InfCTeMultimodal)
 	}
 
 	class InfCTeNorm {
@@ -556,6 +559,7 @@
 		public $infCteComp; //String
 		public $infCteAnu; //String
 		public $autXML; //String
+		public $infRespTec;
 	}
 
 	class CTe
@@ -694,6 +698,11 @@
 		public $vTar; //String
 		public $dIni; //String
 		public $dFim; //String
+		public $classDuto;
+		public $tpContratacao; //String
+		public $codPontoEntrada; //String
+		public $codPontoSaida; //String
+		public $nContrato; //String
 	}
 
 	class InfSeg
@@ -732,5 +741,100 @@
 		public $CTe; //CTe 
 		public $infModal; //InfModal 
 	}
+
+	class InfRespTec {
+		public $CNPJ;
+		public $xContato;
+		public $email;
+		public $fone;
+	}
+
+	//novos campos rtc
+
+	class IBSCBS {
+		public $CST; //String
+		public $cClassTrib; //String
+		public $indDoacao; //String
+		public $gIBSCBS; //gIBSCBS
+		public $gEstornoCred; //gEstornoCred
+		}
+
+	class gIBSCBS {
+		public $vBC; //String
+		public $vIBS; //String
+		public $gIBSUF; //gIBSUF
+		public $gIBSMun; //gIBSMun
+		public $gCBS; //gCBS
+		public $gTribRegular; //gTribRegular
+		public $gTribCompraGov; //gTribCompraGov
+	}
+
+	class gIBSUF {
+		public $pIBSUF; //String
+		public $vIBSUF; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+		class gDif {
+		public $pDif; //String
+		public $vDif; //String
+	}
+
+	class gDevTrib {
+		public $vDevTrib; //String
+	}
+
+	class gRed {
+		public $pRedAliq; //String
+		public $pAliqEfet; //String
+		}
+
+	class gIBSMun {
+		public $pIBSMun; //String
+		public $vIBSMun; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+	class gCBS {
+		public $pCBS; //String
+		public $vCBS; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+	class gTribRegular {
+		public $CSTReg; //String
+		public $cClassTribReg; //String
+		public $pAliqEfetRegIBSUF; //String
+		public $vTribRegIBSUF; //String
+		public $pAliqEfetRegIBSMun; //String
+		public $vTribRegIBSMun; //String
+		public $pAliqEfetRegCBS; //String
+		public $vTribRegCBS; //String
+	}
+
+	class gEstornoCred {
+		public $vIBSEstCred; //gEstornoCred
+		public $vCBSEstCred; //gEstornoCred
+	}
+
+	class gTribCompraGov {
+		public $pAliqIBSUF; //String
+		public $vTribIBSUF; //String
+		public $pAliqIBSMun; //String
+		public $vTribIBSMun; //String
+		public $pAliqCBS; //String
+		public $vTribCBS; //String
+	}
+
+	class gCompraGov {
+		public $tpEnteGov; //string
+		public $pRedutor; //string
+	}
+	
 ?>
-  

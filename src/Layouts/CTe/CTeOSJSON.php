@@ -209,6 +209,8 @@
 		public $ICMS; //ICMS 
         public $ICMSUFFim; //ICMSUFFim
         public $infTribFed;
+        public $vTotDFe;
+        public $IBSCBS; //IBSCBS
 	}
     class Comp 
     {
@@ -321,6 +323,7 @@
         public $infPercurso;
 		public $dhCont; 
 		public $xJust; 
+        public $gCompraGov;
     }
     class InfCTe 
     {
@@ -346,5 +349,104 @@
     {
         public $CTeOS;
     }
+
+    //novos campos rtc
+
+    class gCompraGov {
+		public $tpEnteGov; //string
+		public $pRedutor; //string
+	}
+
+    class IBSCBS {
+		public $CST; //String
+		public $cClassTrib; //String
+		public $gIBSCBS; //gIBSCBS
+		public $gCredPresIBSZFM; //gCredPresIBSZFM
+		public $gEstornoCred; //gEstornoCred
+		}
+
+	class gIBSCBS {
+		public $vBC; //String
+		public $vIBS; //String
+		public $gIBSUF; //gIBSUF
+		public $gIBSMun; //gIBSMun
+		public $gCBS; //gCBS
+		public $gTribRegular; //gTribRegular
+		public $gIBSCredPress; //gIBSCredPres
+		public $gCBSCredPres; //gCBSCredPres
+		public $gTribCompraGov; //gTribCompraGov
+	}
+
+	class gIBSUF {
+		public $pIBSUF; //String
+		public $vIBSUF; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+	class gDif {
+		public $pDif; //String
+		public $vDif; //String
+	}
+
+	class gDevTrib {
+		public $vDevTrib; //String
+	}
+
+	class gRed {
+		public $pRedAliq; //String
+		public $pAliqEfet; //String
+		}
+
+	class gIBSMun {
+		public $pIBSMun; //String
+		public $vIBSMun; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+	class gCBS {
+		public $pCBS; //String
+		public $vCBS; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+	class gTribRegular {
+		public $CSTReg; //String
+		public $cClassTribReg; //String
+		public $pAliqEfetRegIBSUF; //String
+		public $vTribRegIBSUF; //String
+		public $pAliqEfetRegIBSMun; //String
+		public $vTribRegIBSMun; //String
+		public $pAliqEfetRegCBS; //String
+		public $vTribRegCBS; //String
+	}
+
+	class gTribCompraGov {
+		public $pAliqIBSUF; //String
+		public $vTribIBSUF; //String
+		public $pAliqIBSMun; //String
+		public $vTribIBSMun; //String
+		public $pAliqCBS; //String
+		public $vTribCBS; //String
+	}
+
+    class gIBSCredPres {
+		public $cCredPres; //String
+		public $pCredPres; //String
+		public $vCredPres; //String
+		public $vCredPresCondSus; //String
+	}
+
+	class gCBSCredPres {
+		public $cCredPres; //String
+		public $pCredPres; //String
+		public $vCredPres; //String
+		public $vCredPresCondSus; //String
+	}
 
 ?>

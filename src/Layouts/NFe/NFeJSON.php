@@ -58,6 +58,12 @@
 		public $dhCont; //String
 		public $xJust; //String
 		public $NFref; //array(NFref)
+		public $cMunFGIBS; //string
+		public $tpNFDebito; //string
+		public $tpNFCredito; //string
+		public $dPrevEntrega; //string
+		public $gCompraGov; //gCompraGov
+		public $gPagAntecipado; //gPagAntecipado
 	}
 
 	class EnderEmit {
@@ -257,11 +263,6 @@
 		public $cEAN; //String
 		public $xProd; //String
 		public $NCM; //String
-		public $NVE; //String
-		public $CEST; //String
-		public $indEscala; //String
-		public $CNPJFab; //String
-		public $cBenef; //String
 		public $EXTIPI; //String
 		public $CFOP; //String
 		public $uCom; //String
@@ -277,17 +278,46 @@
 		public $vDesc; //String
 		public $vOutro; //String
 		public $indTot; //String
-		public $rastro; //array(Rastro)
-		public $DI; //array(DI)
-		public $detExport; //array(DetExport)
 		public $xPed; //String
 		public $nItemPed; //String
 		public $nFCI; //String
+		public $NVE; //String
+		public $CEST; //String
+		public $indEscala; //String
+		public $CNPJFab; //String
+		public $cBenef; //String
+		public $cBarra; //String
+		public $cBarraTrib; //String
+		public $indBemMovelUsado; //String
+		public $tpCredPresIBSZFM; //String
+		public $gCred; //gCred
+		public $rastro; //array(Rastro)
+		public $DI; //array(DI)
+		public $detExport; //array(DetExport)
 		public $veicProd; //VeicProd
 		public $med; //Med
 		public $arma; //array(Arma)
 		public $comb; //Comb
 		public $nRECOPI; //String
+		public $infProdNFF; //infProdNFF
+		public $infProdEmb; //InfProdEmb
+	}
+
+	class InfProdEmb {
+		public $xEmb; //String
+		public $qVolEmb; //String
+		public $uEmb; //String
+	}
+
+	class infProdNFF {
+		public $cProdFisco; //String
+		public $cOperNFF; //String
+	}
+
+	class gCred {
+		public $cCredPresumido; //String
+		public $pCredPresumido; //String
+		public $vCredPresumido; //String
 	}
 
 	class ICMS00 {
@@ -711,7 +741,17 @@
 		public $COFINS; //COFINS
 		public $COFINSST; //COFINSST
 		public $ISSQN; //ISSQN
+		public $IS; //IS
+		public $IBSCBS; //IBSCBS
 	}
+
+
+	class gIBSCBSCredPres {
+		public $pCredPres; //String
+		public $vCredPres; //String
+		public $vCredPresCondSus; //String
+	}
+
 	class IPIDevol {
 		public $vIPIDevol; //String or Double(13v2)
 	}
@@ -726,6 +766,8 @@
 		public $impostoDevol; //ImpostoDevol
 		public $infAdProd; //String
 		public $nItem; //String
+		public $vItem; //String
+		public $DFeReferenciado; //DFeReferenciado
 	}
 
 	class ICMSTot {
@@ -783,6 +825,9 @@
 		public $ICMSTot; //ICMSTot
 		public $ISSQNtot; //ISSQNtot
 		public $retTrib; //RetTrib
+		public $vNFTot;
+		public $ISTot; //ISTot
+		public $IBSCBSTot; //IBSCBSTot
 	}
 
 	class Transporta {
@@ -960,6 +1005,7 @@
 		public $compra; //Compra
 		public $cana; //Cana
 		public $infRespTec;
+		public $agropecuario; //agropecuario
 	}
 
 	class NFe {
@@ -977,4 +1023,264 @@
 		public $fone;
 	}
 
+	//novos grupos da reforma tributaria
+
+	class agropecuario {
+		public $defensivo; //defensivo
+		public $guiaTransito; //string
+	}
+
+	class guiaTransito {
+		public $tpGuia; //string
+		public $UFGuia; //string
+		public $serieGuia; //string
+		public $nGuia; //string
+	}
+
+	class defensivo {
+		public $nReceituario; //string
+		public $CPFRespTec; //string
+	}
+
+	class gCompraGov {
+		public $tpEnteGov; //string
+		public $pRedutor; //string
+		public $tpOperGov; //string
+	}
+
+	class gPagAntecipado {
+		public $refNFe; //string
+	}
+
+	class DFeReferenciado {
+		public $chaveAcesso; //String
+		public $nItem; //String
+	}
+
+	class IS{
+		public $CSTIS; //String
+		public $cClassTribIS; //String
+		public $vBCIS; //String
+		public $pIS; //String
+		public $pISEspec; //String
+		public $uTrib; //String
+		public $qTrib; //String
+		public $vIS; //String
+
+	}
+
+	class IBSCBS {
+		public $CST; //String
+		public $cClassTrib; //String
+		public $indDoacao; //String
+		public $gIBSCBS; //gIBSCBS
+		public $gIBSCBSMono; //gIBSCBSMono
+		public $gTransfCred; //gTransfCred
+		public $gCredPresIBSZFM; //gCredPresIBSZFM
+		public $gAjusteCompet; //gAjusteCompet
+		public $gEstornoCred; //gEstornoCred
+		public $gCredPresOper; //gCredPresOper
+		}
+
+	class gIBSCBS {
+		public $vBC; //String
+		public $vIBS; //String
+		public $gIBSUF; //gIBSUF
+		public $gIBSMun; //gIBSMun
+		public $gCBS; //gCBS
+		public $gTribRegular; //gTribRegular
+		public $gIBSCredPress; //gIBSCredPres
+		public $gCBSCredPres; //gCBSCredPres
+		public $gTribCompraGov; //gTribCompraGov
+	}
+
+	class gIBSUF {
+		public $pIBSUF; //String
+		public $vIBSUF; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+		class gDif {
+		public $pDif; //String
+		public $vDif; //String
+	}
+
+	class gDevTrib {
+		public $vDevTrib; //String
+	}
+
+	class gRed {
+		public $pRedAliq; //String
+		public $pAliqEfet; //String
+		}
+
+	class gIBSMun {
+		public $pIBSMun; //String
+		public $vIBSMun; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+	class gCBS {
+		public $pCBS; //String
+		public $vCBS; //String
+		public $gDif; //gDif
+		public $gDevTrib; //gDevTrib
+		public $gRed; //gRed
+	}
+
+	class gTribRegular {
+		public $CSTReg; //String
+		public $cClassTribReg; //String
+		public $pAliqEfetRegIBSUF; //String
+		public $vTribRegIBSUF; //String
+		public $pAliqEfetRegIBSMun; //String
+		public $vTribRegIBSMun; //String
+		public $pAliqEfetRegCBS; //String
+		public $vTribRegCBS; //String
+	}
+
+	class gTribCompraGov {
+		public $pAliqIBSUF; //String
+		public $vTribIBSUF; //String
+		public $pAliqIBSMun; //String
+		public $vTribIBSMun; //String
+		public $pAliqCBS; //String
+		public $vTribCBS; //String
+	}
+
+	class gIBSCBSMono {
+		public $vTotIBSMonoItem; //String
+		public $vTotCBSMonoItem; //String
+		public $gMonoPadrao; //gMonoPadrao
+		public $gMonoReten; //gMonoRetencao
+		public $gMonoRet; //gMonoRet
+		public $gMonoDif; //gMonoDif
+	}
+
+	class gMonoPadrao {
+		public $qBCMono; //String
+		public $adRemIBS; //String
+		public $adRemCBS; //String
+		public $vIBSMono; //String
+		public $vCBSMono; //String
+	}
+
+	class gMonoReten {
+		public $qBCMonoReten; //String
+		public $adRemIBSReten; //String
+		public $adRemCBSReten; //String
+		public $vIBSMonoReten; //String
+		public $vCBSMonoReten; //String
+	}
+
+	class gMonoRet {
+		public $qBCMonoRet; //String
+		public $adRemIBSReten; //String
+		public $adRemCBSReten; //String
+		public $vIBSMonoRet; //String
+		public $vCBSMonoRet; //String
+	}
+
+	class gMonoDif {
+		public $pDifCBS; //String
+		public $pDifIBS; //String
+		public $vIBSMonoDif; //String
+		public $vCBSMonoDif; //String
+		public $vTotIBSMonoItem; //String
+		public $vTotCBSMonoItem; //String
+	}
+
+	class gTransfCred {
+		public $vIBS; //String
+		public $vCBS; //String
+	}
+
+	class gCredPresIBSZFM {
+		public $competApur; //String
+		public $vCredPresIBSZFM; //String
+		public $tpCredPresIBSZFM; //String
+	}
+
+	class gAjusteCompet {
+		public $competApur; //String
+		public $vIBS; //String
+		public $vCBS; //String
+	}
+
+	class gEstornoCred {
+		public $vIBSEstCred; //gEstornoCred
+		public $vCBSEstCred; //gEstornoCred
+	}
+
+	class gCredPresoper {
+		public $vBCCredPres; //String
+		public $cCredPres; //String
+		public $gIBSCredPres; //gIBSCredPres
+		public $gCBSCredPres;
+	}
+
+	class gIBSCredPres {
+		public $cCredPres; //String
+		public $pCredPres; //String
+		public $vCredPres; //String
+		public $vCredPresCondSus; //String
+	}
+
+	class gCBSCredPres {
+		public $cCredPres; //String
+		public $pCredPres; //String
+		public $vCredPres; //String
+		public $vCredPresCondSus; //String
+	}
+
+	class ISTot {
+		public $vIS;
+	}
+
+	class IBSCBSTot {
+		public $vBCIBSCBS; //String
+		public $gIBS; //gIBS
+		public $gCBS; //gCBS
+		public $gEstornoCred; //gEstornoCred
+		public $gMono; //gMono
+	}
+
+	class gIBS {
+		public $gIBSUF; //gIBSUF
+		public $gIBSMun; //gIBSMun
+		public $vIBS; //vIBS
+		public $vCredPres; //string
+		public $vCredPresCondSus; //string
+	}
+
+	class gCBS {
+		public $vDif; //gCBSUF
+		public $vDevTrib; //gCBSMun
+		public $vCBS; //vCBS
+	}
+
+	class gMono {
+		public $vIBSMono;
+		public $vCBSMono;
+		public $vIBSMonoReten;
+		public $vCBSMonoReten;
+		public $vIBSMonoRet;
+		public $vCBSMonoRet;
+	}
+
+	class gIBSMun {
+		public $vIBSMun; //String
+		public $vDif; //gDif
+		public $vDevTrib; //gDevTrib
+	}
+
+	class gIBSUF {
+		public $vIBSUF; //String
+		public $vDif; //gDif
+		public $vDevTrib; //gDevTrib
+	}
 ?>
