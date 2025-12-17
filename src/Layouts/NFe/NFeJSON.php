@@ -1,4 +1,4 @@
-<?phprefNFe
+<?php
 	class RefNF {
 		public $cUF;  //String
 		public $AAMM; //String
