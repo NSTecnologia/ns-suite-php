@@ -1,4 +1,4 @@
-<?php
+<?phprefNFe
 	class RefNF {
 		public $cUF;  //String
 		public $AAMM; //String
@@ -29,6 +29,7 @@
 	class NFref {
 		public $refNFe; //String
 		public $refNF; //RefNF
+		public $refNFeSig; //
 		public $refNFP; //RefNFP
 		public $refECF; //RefECF
 	}
@@ -130,6 +131,13 @@
 		public $cMun; //String
 		public $xMun; //String
 		public $UF; //String
+		public $CEP;
+		public $cPais;
+		public $xPais;
+		public $fone;
+		public $email;
+		public $xNome;
+		public $IE;
 	}
 
 	class Entrega {
@@ -142,6 +150,13 @@
 		public $cMun; //String
 		public $xMun; //String
 		public $UF; //String
+		public $CEP;
+		public $cPais;
+		public $xPais;
+		public $fone;
+		public $email;
+		public $xNome;
+		public $IE;
 	}
 
 	class AutXML {
@@ -177,7 +192,7 @@
 		public $CNPJ; //String
 		public $UFTerceiro; //String
 		public $cExportador; //String
-		public $adi; //Adi
+		public $adi; //Adi(Array)
 	}
 
 	class ExportInd {
@@ -221,6 +236,7 @@
 	class Med {
 		public $cProdANVISA; //String
 		public $vPMC; //String
+		public $xMotivoIsencao;
 	}
 
 	class Arma {
@@ -255,6 +271,7 @@
 		public $qTemp; //String
 		public $UFCons; //String
 		public $CIDE; //CIDE
+		public $pBio;
 		public $encerrante; //Encerrante
 	}
 
@@ -331,6 +348,14 @@
 		public $vFCP; //String
 	}
 
+	class ICMS02 {
+		public $orig; //String
+		public $CST; //String
+		public $qBCMono;
+		public $adRemICMS;
+		public $vICMSMono;
+	}
+
 	class ICMS10 {
 		public $orig; //String
 		public $CST; //String
@@ -350,6 +375,21 @@
 		public $vBCFCPST; //String
 		public $pFCPST; //String
 		public $vFCPST; //String
+		public $vICMSSTDeson;
+		public $motDesICMSST;
+	}
+
+	class ICMS15 {
+		public $orig;
+		public $CST;
+		public $qBCMon;
+		public $adRemICMS;
+		public $vICMSMono;
+		public $qBCMonoReten;
+		public $adRemICMSReten;
+		public $vICMSMonoReten;
+		public $pRedAdRem;
+		public $motRedAdRem;
 	}
 
 	class ICMS20 {
@@ -365,6 +405,7 @@
 		public $vFCP; //String
 		public $vICMSDeson; //String
 		public $motDesICMS; //String
+		public $indDeduzDeson;
 	}
 
 	class ICMS30 {
@@ -381,6 +422,7 @@
 		public $vFCPST; //String
 		public $vICMSDeson; //String
 		public $motDesICMS; //String
+		public $indDeduzDeson;
 	}
 
 	class ICMS40 {
@@ -388,6 +430,23 @@
 		public $CST; //String
 		public $vICMSDeson; //String
 		public $motDesICMS; //String
+		public $indDeduzDeson;
+	}
+
+	class ICMS41 {
+		public $orig; //String
+		public $CST; //String
+		public $vICMSDeson; //String
+		public $motDesICMS; //String
+		public $indDeduzDeson;
+	}
+
+	class ICMS50 {
+		public $orig; //String
+		public $CST; //String
+		public $vICMSDeson; //String
+		public $motDesICMS; //String
+		public $indDeduzDeson;
 	}
 
 	class ICMS51 {
@@ -404,6 +463,20 @@
 		public $vBCFCP; //String
 		public $pFCP; //String
 		public $vFCP; //String
+		public $pFCPDif;
+		public $vFCPDif;
+		public $vFCPEfet;
+	}
+
+	class ICMS53 {
+		public $orig;
+		public $CST;
+		public $qBCMono;
+		public $adRemICMS;
+		public $vICMSMonoOp;
+		public $pDif;
+		public $vICMSMonoDif;
+		public $vICMSMono;
 	}
 
 	class ICMS60 {
@@ -415,6 +488,19 @@
 		public $vBCFCPSTRet; //String
 		public $pFCPSTRet; //String
 		public $vFCPSTRet; //String
+		public $pRedBCEfet;
+		public $vBCEfet;
+		public $pICMSEfet;
+		public $vICMSEfet;
+		public $vICMSSubstituto;
+	}
+
+	class ICMS61 {
+		public $orig;
+		public $CST;
+		public $qBCMonoRet;
+		public $adRemICMSRet;
+		public $vICMSMonoRet
 	}
 
 	class ICMS70 {
@@ -439,6 +525,9 @@
 		public $vFCPST; //String
 		public $vICMSDeson; //String
 		public $motDesICMS; //String
+		public $vICMSSTDeson;
+		public $motDesICMSST;
+		public $indDeduzDeson;
 	}
 
 	class ICMS90 {
@@ -463,6 +552,9 @@
 		public $vFCPST; //String
 		public $vICMSDeson; //String
 		public $motDesICMS; //String
+		public $vICMSSTDeson;
+		public $motDesICMSST;
+		public $indDeduzDeson;
 	}
 
 	class ICMSPart {
@@ -481,6 +573,9 @@
 		public $vICMSST; //String
 		public $pBCOp; //String
 		public $UFST; //String
+		public $vBCFCPST;
+		public $pFCPST;
+		public $vFCPST;
 	}
 
 	class ICMSST {
@@ -490,6 +585,15 @@
 		public $vICMSSTRet; //String
 		public $vBCSTDest; //String
 		public $vICMSSTDest; //String
+		public $vBCFCPSTRet;
+		public $pFCPSTRet;
+		public $vFCPSTRet;
+		public $pST;
+		public $vICMSSubstituto;
+		public $pRedBCEfet;
+		public $vBCEfet;
+		public $pICMSEfet;
+		public $vICMSEfet;
 	}
 
 	class ICMSSN101 {
@@ -543,6 +647,11 @@
 		public $vBCFCPSTRet; //String
 		public $pFCPSTRet; //String
 		public $vFCPSTRet; //String
+		public $pRedBCEfet;
+		public $vBCEfet;
+		public $pICMSEfet;
+		public $vICMSEfet;
+		public $vICMSSubstituto;
 	}
 
 	class ICMSSN900 {
@@ -580,12 +689,18 @@
 
 	class ICMS {
 		public $ICMS00; //ICMS00
+		public $ICMS02; 
 		public $ICMS10; //ICMS10
+		public $ICMS15;
 		public $ICMS20; //ICMS20
 		public $ICMS30; //ICMS30
 		public $ICMS40; //ICMS40
+		public $ICMS41;
+		public $ICMS50;
+		public $ICMS53;
 		public $ICMS51; //ICMS51
 		public $ICMS60; //ICMS60
+		public $ICMS61;
 		public $ICMS70; //ICMS70
 		public $ICMS90; //ICMS90
 		public $ICMSPart; //ICMSPart
@@ -667,6 +782,7 @@
 		public $qBCProd; //String
 		public $vAliqProd; //String
 		public $vPIS; //String
+		public $indSomaPISST;
 	}
 
 	class COFINSAliq {
@@ -709,6 +825,7 @@
 		public $qBCProd; //String
 		public $vAliqProd; //String
 		public $vCOFINS; //String
+		public $indSomaCOFINSST;
 	}
 
 	class ISSQN {
@@ -794,6 +911,12 @@
 		public $vOutro; //String
 		public $vNF; //String
 		public $vTotTrib; //String
+		public $qBCMono;
+		public $vICMSMono;
+		public $qBCMonoReten;
+		public $vICMSMonoReten;
+		public $qBCMonoRet;
+		public $vICMSMonoRet;
 	}
 
 	class ISSQNtot {
@@ -909,12 +1032,18 @@
 		public $tBand; //String
 		public $cAut; //String
 		public $tpIntegra; //String
+		public $CNPJReceb;
+		public $idTermPag;
 	}
 
 	class DetPag {
 		public $indPag; //String
 		public $tPag; //String
 		public $vPag; //String
+		public $xPag;
+		public $dPag;
+		public $CNPJPag;
+		public $UFPag;
 		public $card; //Card
 	}
 
@@ -941,6 +1070,7 @@
 	class ProcRef {
 		public $nProc; //String
 		public $indProc; //String
+		public $tpAto;
 	}
 
 	class InfAdic {
@@ -984,6 +1114,12 @@
 		public $ref; //String
 		public $forDia; //array(ForDia)
 		public $deduc; //array(Deduc)
+		public $qTotMes;
+		public $qTotAnt;
+		public $qTotGer;
+		public $vFor;
+		public $vTotDed;
+		public $vLiqFor;
 	}
 
 	class InfNFe {
@@ -1153,8 +1289,11 @@
 	}
 
 	class gIBSCBSMono {
-		public $vTotIBSMonoItem; //String
-		public $vTotCBSMonoItem; //String
+		public $qBCMono; //String
+		public $adRemIBS; //String
+		public $adRemCBS;
+		public $vIBSMono;
+		public $vCBSMono;
 		public $gMonoPadrao; //gMonoPadrao
 		public $gMonoReten; //gMonoRetencao
 		public $gMonoRet; //gMonoRet
@@ -1261,6 +1400,8 @@
 		public $vDif; //gCBSUF
 		public $vDevTrib; //gCBSMun
 		public $vCBS; //vCBS
+		public $vCredPres;
+		public $vCredPresCondSus;
 	}
 
 	class gMono {
