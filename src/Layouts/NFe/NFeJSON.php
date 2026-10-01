@@ -65,6 +65,7 @@
 		public $dPrevEntrega; //string
 		public $gCompraGov; //gCompraGov
 		public $gPagAntecipado; //gPagAntecipado
+		public $cIndOp; //String - indicador da operação (cIndOp, NT 2025.002 v1.51)
 	}
 
 	class EnderEmit {
@@ -92,6 +93,7 @@
 		public $IM; //String
 		public $CNAE; //String
 		public $CRT; //String
+		public $ISUFEmit; //String - Inscrição SUFRAMA do emitente (NT 2025.002 v1.51)
 	}
 
 	class EnderDest {
@@ -500,7 +502,7 @@
 		public $CST;
 		public $qBCMonoRet;
 		public $adRemICMSRet;
-		public $vICMSMonoRet
+		public $vICMSMonoRet;
 	}
 
 	class ICMS70 {
@@ -555,6 +557,13 @@
 		public $vICMSSTDeson;
 		public $motDesICMSST;
 		public $indDeduzDeson;
+		public $cBenefRBC; //String - v1.51
+		public $vICMSOp; //String - v1.51
+		public $pDif; //String - v1.51
+		public $vICMSDif; //String - v1.51
+		public $pFCPDif; //String - v1.51
+		public $vFCPDif; //String - v1.51
+		public $vFCPEfet; //String - v1.51
 	}
 
 	class ICMSPart {
@@ -576,6 +585,9 @@
 		public $vBCFCPST;
 		public $pFCPST;
 		public $vFCPST;
+		public $vICMSDeson; //String - CST 20 (v1.51)
+		public $motDesICMS; //String - CST 20 (v1.51)
+		public $indDeduzDeson; //String - CST 20 (v1.51)
 	}
 
 	class ICMSST {
@@ -1182,6 +1194,7 @@
 		public $tpEnteGov; //string
 		public $pRedutor; //string
 		public $tpOperGov; //string
+		public $refDFeAnt; //array(String) - chaves de acesso dos DF-e anteriores (tpOperGov=2)
 	}
 
 	class gPagAntecipado {
@@ -1199,6 +1212,7 @@
 		public $vBCIS; //String
 		public $pIS; //String
 		public $pISEspec; //String
+		public $adRemIS; //String - v1.51
 		public $uTrib; //String
 		public $qTrib; //String
 		public $vIS; //String
@@ -1244,6 +1258,7 @@
 	}
 
 	class gDevTrib {
+		public $pDevTrib; //String - v1.51 (obrigatório na CBS)
 		public $vDevTrib; //String
 	}
 
@@ -1266,6 +1281,13 @@
 		public $gDif; //gDif
 		public $gDevTrib; //gDevTrib
 		public $gRed; //gRed
+		public $gALCZFMCBS; //gALCZFMCBS - v1.51
+	}
+
+	class gALCZFMCBS {
+		public $tpALCZFMCBS; //String
+		public $pAliqEfetRegCBS; //String
+		public $vTribRegCBS; //String
 	}
 
 	class gTribRegular {
@@ -1289,6 +1311,11 @@
 	}
 
 	class gIBSCBSMono {
+		public $gIBSMonoAdValorem; //gMonoGrupo - v1.51
+		public $gCBSMonoAdValorem; //gMonoGrupo - v1.51
+		public $gCBSMonoAdRem; //gMonoGrupo - v1.51
+		public $vTotIBSMonoItem; //String
+		public $vTotCBSMonoItem; //String
 		public $qBCMono; //String
 		public $adRemIBS; //String
 		public $adRemCBS;
@@ -1298,6 +1325,15 @@
 		public $gMonoReten; //gMonoRetencao
 		public $gMonoRet; //gMonoRet
 		public $gMonoDif; //gMonoDif
+	}
+
+	//grupo de cada ramo da monofasia (ad valorem / ad rem): informar apenas os subgrupos aplicáveis
+	class gMonoGrupo {
+		public $gMonoPadrao; //gMonoPadrao
+		public $gMonoReten; //gMonoReten
+		public $gMonoRet; //gMonoRet
+		public $gMonoDif; //gMonoDif
+		public $gpBioDiferenca; //String/obj - diferença do biocombustível
 	}
 
 	class gMonoPadrao {
@@ -1382,21 +1418,21 @@
 
 	class IBSCBSTot {
 		public $vBCIBSCBS; //String
-		public $gIBS; //gIBS
-		public $gCBS; //gCBS
+		public $gIBS; //gIBSTot
+		public $gCBS; //gCBSTot
 		public $gEstornoCred; //gEstornoCred
 		public $gMono; //gMono
 	}
 
-	class gIBS {
-		public $gIBSUF; //gIBSUF
-		public $gIBSMun; //gIBSMun
+	class gIBSTot {
+		public $gIBSUF; //gIBSUFTot
+		public $gIBSMun; //gIBSMunTot
 		public $vIBS; //vIBS
 		public $vCredPres; //string
 		public $vCredPresCondSus; //string
 	}
 
-	class gCBS {
+	class gCBSTot {
 		public $vDif; //gCBSUF
 		public $vDevTrib; //gCBSMun
 		public $vCBS; //vCBS
@@ -1413,13 +1449,13 @@
 		public $vCBSMonoRet;
 	}
 
-	class gIBSMun {
+	class gIBSMunTot {
 		public $vIBSMun; //String
 		public $vDif; //gDif
 		public $vDevTrib; //gDevTrib
 	}
 
-	class gIBSUF {
+	class gIBSUFTot {
 		public $vIBSUF; //String
 		public $vDif; //gDif
 		public $vDevTrib; //gDevTrib

@@ -215,6 +215,84 @@
 
     class Imp {
         public $ICMS;  //ICMS
+        public $vTotDFe; //String - total do DFe (= vBP), dentro de imp, irmão de ICMS/IBSCBS
+        public $IBSCBS; //IBSCBS
+    }
+
+    //novos campos rtc (BPe: gDevTrib não é válido neste modelo)
+
+    class IBSCBS {
+        public $CST; //String
+        public $cClassTrib; //String
+        public $indDoacao; //String
+        public $gIBSCBS; //gIBSCBS
+        public $gEstornoCred; //gEstornoCred - só com CST 410 / cClassTrib 410026, sem gIBSCBS
+    }
+
+    class gIBSCBS {
+        public $vBC; //String
+        public $vIBS; //String
+        public $gIBSUF; //gIBSUF
+        public $gIBSMun; //gIBSMun
+        public $gCBS; //gCBS
+        public $gTribRegular; //gTribRegular
+        public $gTribCompraGov; //gTribCompraGov
+    }
+
+    class gIBSUF {
+        public $pIBSUF; //String
+        public $vIBSUF; //String
+        public $gDif; //gDif
+        public $gRed; //gRed
+    }
+
+    class gIBSMun {
+        public $pIBSMun; //String
+        public $vIBSMun; //String
+        public $gDif; //gDif
+        public $gRed; //gRed
+    }
+
+    class gCBS {
+        public $pCBS; //String
+        public $vCBS; //String
+        public $gDif; //gDif
+        public $gRed; //gRed
+    }
+
+    class gDif {
+        public $pDif; //String
+        public $vDif; //String
+    }
+
+    class gRed {
+        public $pRedAliq; //String
+        public $pAliqEfet; //String
+    }
+
+    class gTribRegular {
+        public $CSTReg; //String
+        public $cClassTribReg; //String
+        public $pAliqEfetRegIBSUF; //String
+        public $vTribRegIBSUF; //String
+        public $pAliqEfetRegIBSMun; //String
+        public $vTribRegIBSMun; //String
+        public $pAliqEfetRegCBS; //String
+        public $vTribRegCBS; //String
+    }
+
+    class gEstornoCred {
+        public $vIBSEstCred; //String
+        public $vCBSEstCred; //String
+    }
+
+    class gTribCompraGov {
+        public $pAliqIBSUF; //String
+        public $vTribIBSUF; //String
+        public $pAliqIBSMun; //String
+        public $vTribIBSMun; //String
+        public $pAliqCBS; //String
+        public $vTribCBS; //String
     }
 
     class Card {

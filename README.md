@@ -273,3 +273,18 @@ A função inutilizarNumeracaoESalvar irá inutilizar a numeração do documento
  
 
 ![Ns](https://nstecnologia.com.br/blog/wp-content/uploads/2018/11/ns%C2%B4tecnologia.png) | Obrigado pela atenção!
+
+
+## Reforma Tributária (RTC):
+
+Os layouts em `src/Layouts/` já trazem os grupos de IBS/CBS/IS. Cada arquivo é independente (use um por modelo de documento).
+
+| Modelo | Arquivo | Campos RTC |
+|---|---|---|
+| NF-e / NFC-e | `Layouts/NFe/NFeJSON.php` | `imposto.IS`, `imposto.IBSCBS`, `total.ISTot`, `total.IBSCBSTot`, `vNFTot`, `ide.cMunFGIBS`, `ide.gCompraGov` (+ `refDFeAnt`), `ide.cIndOp`, `emit.ISUFEmit`, novos campos do ICMS90/ICMSPart (NT 2025.002 v1.51), `gDevTrib.pDevTrib`, `gALCZFMCBS` e monofasia (`gIBSMonoAdValorem`, `gCBSMonoAdValorem`, `gCBSMonoAdRem`) |
+| CT-e / CT-e OS | `Layouts/CTe/CTeJSON.php`, `Layouts/CTe/CTeOSJSON.php` | `imp.IBSCBS`, `imp.vTotDFe` |
+| BP-e | `Layouts/BPe/BPeJSON.php` | `imp.IBSCBS`, `imp.vTotDFe` (`gDevTrib` não é válido para BP-e) |
+
+Observações:
+- Preencha as datas (`dhEmi`, competência etc.) com a data atual.
+- Os valores seguem como string, com ponto decimal (ex.: `"pCBS": "0.90"`).
